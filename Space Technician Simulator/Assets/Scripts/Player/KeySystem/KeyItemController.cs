@@ -38,7 +38,7 @@ namespace KeySystem {
         private void Start()
         {
             if (!_KeyInventory) {
-                _KeyInventory = GameObject.Find("Player").GetComponent<KeyInventory>();
+                _KeyInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<KeyInventory>();
 
                 if (!_KeyInventory)
                     Debug.LogError("KeyInventory is missing from the Player GameObject.");

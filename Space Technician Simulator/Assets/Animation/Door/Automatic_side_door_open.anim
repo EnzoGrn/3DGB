@@ -39,13 +39,13 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_02
+    path: Door/SM_Bld_Wall_Door_02
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -1.769527, y: -0.004558563, z: 0}
+        value: {x: -1.7695266, y: -0.004558563, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -64,7 +64,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_01
+    path: Door/SM_Bld_Wall_Door_01
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -76,7 +76,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 911792768
+      path: 1138002247
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -85,7 +85,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2941356858
+      path: 3671972093
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -141,7 +141,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_02
+    path: Door/SM_Bld_Wall_Door_02
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -171,7 +171,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_02
+    path: Door/SM_Bld_Wall_Door_02
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -201,7 +201,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_02
+    path: Door/SM_Bld_Wall_Door_02
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -211,7 +211,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -1.769527
+        value: -1.7695266
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -231,7 +231,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_01
+    path: Door/SM_Bld_Wall_Door_01
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -261,7 +261,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_01
+    path: Door/SM_Bld_Wall_Door_01
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -291,7 +291,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: SM_Bld_Wall_Doorframe_05/SM_Bld_Wall_Door_01
+    path: Door/SM_Bld_Wall_Door_01
     classID: 4
     script: {fileID: 0}
     flags: 0

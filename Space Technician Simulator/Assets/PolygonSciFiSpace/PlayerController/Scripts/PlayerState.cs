@@ -12,6 +12,19 @@ namespace Player.Controller
         {
             CurrentPlayerMovementState = playerMovementState;
         }
+
+        public bool InGroundedState()
+        {
+            return IsStateGroundedState(CurrentPlayerMovementState);
+        }
+
+        public bool IsStateGroundedState(PlayerMovementState movementState)
+        {
+            return movementState == PlayerMovementState.Idling ||
+                   movementState == PlayerMovementState.Walking ||
+                   movementState == PlayerMovementState.Running ||
+                   movementState == PlayerMovementState.Sprinting;
+        }
     }
     public enum PlayerMovementState
     {

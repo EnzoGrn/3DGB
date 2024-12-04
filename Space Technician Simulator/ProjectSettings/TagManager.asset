@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Scanner
+  - InteractiveObject
   layers:
   - Default
   - TransparentFX
@@ -11,6 +13,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Interact
   - Player
   - 
   - 

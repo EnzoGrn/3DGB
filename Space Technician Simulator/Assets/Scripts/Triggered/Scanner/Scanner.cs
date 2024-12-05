@@ -31,6 +31,7 @@ public class Scanner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = true;
             _PlayerCamera   = other.GetComponentInChildren<Camera>().transform;
+            Debug.Log("Player is nearby");
         }
     }
 
@@ -51,6 +52,9 @@ public class Scanner : MonoBehaviour {
             Ray ray = new(_PlayerCamera.position, _PlayerCamera.forward);
 
             if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
+                Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
+                Debug.Log(hit.transform.gameObject.name);
+                Debug.Log(hit.transform.gameObject.tag);
                 if (hit.transform.gameObject.CompareTag("Scanner")) {
 
                     if (_OnEventText)

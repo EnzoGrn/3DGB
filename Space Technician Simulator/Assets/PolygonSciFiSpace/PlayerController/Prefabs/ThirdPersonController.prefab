@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 7831653656825945105}
   - component: {fileID: -808867717342220374}
   - component: {fileID: 3136638779863697878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThirdPersonController
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   lookLimitV: 50
   _groundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
 --- !u!143 &3929522320039677623
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1202,13 +1202,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.7
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
+  m_SkinWidth: 0.03
   m_MinMoveDistance: 0.00001
-  m_Center: {x: 0, y: 1.02, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &7831653656825945105
 MonoBehaviour:
   m_ObjectHideFlags: 0

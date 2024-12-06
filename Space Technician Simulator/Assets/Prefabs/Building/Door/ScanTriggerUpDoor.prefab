@@ -326,11 +326,16 @@ PrefabInstance:
     - target: {fileID: 261453391138666108, guid: 66eef3be60825ef4e80b98e576f46e49,
         type: 3}
       propertyPath: m_TagString
-      value: Scanner
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 877815021041667911, guid: 66eef3be60825ef4e80b98e576f46e49,
         type: 3}
       propertyPath: m_Name
+      value: Scanner
+      objectReference: {fileID: 0}
+    - target: {fileID: 877815021041667911, guid: 66eef3be60825ef4e80b98e576f46e49,
+        type: 3}
+      propertyPath: m_TagString
       value: Scanner
       objectReference: {fileID: 0}
     - target: {fileID: 2442037598880928684, guid: 66eef3be60825ef4e80b98e576f46e49,

@@ -24,12 +24,12 @@ public class DialogueTrigger : MonoBehaviour
     private void Update()
     {
         // Check enter key input
-        if (Input.GetKeyDown(KeyCode.T) && _NpcDialogue != null && !IsManualDialogueActive)
+        if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && !IsManualDialogueActive)
         {
             _NpcDialogue.StartDialogue();
             IsManualDialogueActive = true;
         }
-        else if (Input.GetKeyDown(KeyCode.T) && _NpcDialogue != null && IsManualDialogueActive)
+        else if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && IsManualDialogueActive)
         {
             // Continue the dialogue
             _NpcDialogue.NextMessageDialogue();

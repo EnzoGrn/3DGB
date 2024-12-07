@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private ActorSO _Actors;
     [SerializeField] private TMP_Text _Dialogue;
     [SerializeField] private GameObject _DialogueBox;
+    [SerializeField] private GameObject _HintKeyBox;
 
     Message[] _Messages;
 
@@ -28,6 +29,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Deactivate the dialogue box
         _DialogueBox.SetActive(false);
+        _HintKeyBox.SetActive(false);
         _IsDialogueActive = false;
         _MessageCoroutine = null;
         _ActiveMessageIndex = 0;
@@ -56,6 +58,11 @@ public class DialogueManager : MonoBehaviour
         _Messages = dialogues.Messages;
         _ActiveMessageIndex = 0;
         _IsDialogueActive = true;
+
+        if (dialogues.DialogueType == DialogueType.ManualDialogue)
+        {
+            _HintKeyBox.SetActive(true);
+        }
 
         DisplayMessage(dialogues.DialogueType);
     }
@@ -123,6 +130,8 @@ public class DialogueManager : MonoBehaviour
 
         _IsDialogueActive = false;
         _DialogueBox.SetActive(false);
+        _HintKeyBox.SetActive(false);
+
 
         OnDialogueEnded?.Invoke();
     }

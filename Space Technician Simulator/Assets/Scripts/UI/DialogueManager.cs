@@ -13,6 +13,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject _DialogueBox;
     [SerializeField] private GameObject _HintKeyBox;
 
+    [Header("PLayer")]
+    [SerializeField] private GameObject _Player;
+
+    [Header("Dialogue Camera")]
+    [SerializeField] private Camera _PlayerCamera3rdPersonn;
+    [SerializeField] private Camera _PlayerCamera1stPerson;
+    [SerializeField] private DialogueCamera[] _DialogueCamera;
+    private DialogueCamera _DialogueCameraActive;
+
     Message[] _Messages;
 
     private int _ActiveMessageIndex;
@@ -67,6 +76,49 @@ public class DialogueManager : MonoBehaviour
         DisplayMessage(dialogues.DialogueType);
     }
 
+    private DialogueCamera FindDialogueCamera(int actorId)
+    {
+        foreach (DialogueCamera dialogueCamera in _DialogueCamera)
+        {
+            if (dialogueCamera.ActorIndex == actorId)
+            {
+                return dialogueCamera;
+            }
+        }
+
+        return null;
+    }
+
+    private void HandleDialogueCamera(Message message)
+    {
+        if (_DialogueCameraActive != null && _DialogueCameraActive.ActorIndex == message.actorId) return;
+
+        DialogueCamera dialogueCamera = FindDialogueCamera(message.actorId);
+
+        if (_DialogueCameraActive != null)
+        {
+            _DialogueCameraActive.DisableDialogueCamera();
+        }
+        _DialogueCameraActive = dialogueCamera;
+
+        if (message.toLookId == 0)
+        {
+            _DialogueCameraActive.EnableDialogueCamera(_Player.transform);
+        }
+        else
+        {
+            DialogueCamera dialogueCameraToLook = FindDialogueCamera(message.toLookId);
+
+            if (dialogueCameraToLook != null)
+            {
+                _DialogueCameraActive.EnableDialogueCamera(dialogueCameraToLook.transform);
+
+            }
+        }
+        Debug.Log("Camera Enabled");
+        return;
+    }
+
     private void DisplayMessage(DialogueType dialogueType)
     {
         // Get the current message && actor by id
@@ -74,7 +126,12 @@ public class DialogueManager : MonoBehaviour
         Actor actor = _Actors.Actors[message.actorId];
 
         if (actor == null) return;
-            
+
+        if (dialogueType == DialogueType.ManualDialogue)
+        {
+            HandleDialogueCamera(message);
+        }
+
         if (actor.actorName != _Name.text)
         {
             _Name.text = actor.actorName;
@@ -120,11 +177,11 @@ public class DialogueManager : MonoBehaviour
         }
         else 
         {
-            EndDialogue();
+            EndDialogue(dialogueType);
         }
     }
 
-    public void EndDialogue()
+    public void EndDialogue(DialogueType dialogueType)
     {
         Debug.Log("Dialogue Ended");
 
@@ -132,6 +189,15 @@ public class DialogueManager : MonoBehaviour
         _DialogueBox.SetActive(false);
         _HintKeyBox.SetActive(false);
 
+        if (dialogueType == DialogueType.ManualDialogue)
+        {
+            if (_DialogueCameraActive != null)
+            {
+                _DialogueCameraActive.DisableDialogueCamera();
+                _DialogueCameraActive = null;
+                _PlayerCamera3rdPersonn.enabled = true;
+            }
+        }
 
         OnDialogueEnded?.Invoke();
     }
@@ -149,6 +215,7 @@ public class Message
 {
     public int actorId;
     public string message;
+    public int toLookId;
 }
 
 [System.Serializable]

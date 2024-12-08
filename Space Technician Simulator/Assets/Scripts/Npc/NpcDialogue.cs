@@ -145,7 +145,7 @@ public class NpcDialogue : MonoBehaviour
             _IsPlayerDetected = false;
             _IsDialogueActive = false;
 
-            DialogueManager.Instance.EndDialogue();
+            DialogueManager.Instance.EndDialogue(_DialogueSO.DialogueType);
         }
     }
 

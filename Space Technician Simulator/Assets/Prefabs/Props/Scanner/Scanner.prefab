@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7065181727069176263}
   m_Layer: 0
   m_Name: Scanner
-  m_TagString: Untagged
+  m_TagString: Scanner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,10 +67,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c724080e88a9964cbaf284a5df4154d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DoAction:
+    m_PersistentCalls:
+      m_Calls: []
+  UndoAction:
+    m_PersistentCalls:
+      m_Calls: []
   _IsScanned: 0
   _IsPlayerNearby: 0
   _PlayerCamera: {fileID: 0}
   _ScannerDistance: 3
+  _OnEventText: {fileID: 0}
+  _ScannerSound: {fileID: 8300000, guid: 5d88e458df060b84783b2e2fbfe92318, type: 3}
 --- !u!1001 &262130373372234438
 PrefabInstance:
   m_ObjectHideFlags: 0

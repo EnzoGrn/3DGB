@@ -583,7 +583,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  _DialogueTrigger: {fileID: 0}
+  _DialogueTrigger: {fileID: 8791773769993783094}
 --- !u!114 &2431985165561016458
 MonoBehaviour:
   m_ObjectHideFlags: 0

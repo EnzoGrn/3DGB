@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class AreaTriggerDoor : MonoBehaviour {
 
     [Header("Audio")]
@@ -23,6 +24,8 @@ public class AreaTriggerDoor : MonoBehaviour {
     {
         // Check if the player is in the trigger
         if (other.CompareTag("Player")) {
+            if (_Animator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
+                return;
 
             // Trigger the door to open
             _Animator.SetTrigger("Open");

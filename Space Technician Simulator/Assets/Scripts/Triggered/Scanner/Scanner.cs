@@ -57,8 +57,7 @@ public class Scanner : MonoBehaviour {
 
             if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
                 Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
-                Debug.Log(hit.transform.gameObject.name);
-                Debug.Log(hit.transform.gameObject.tag);
+
                 if (hit.transform.gameObject.CompareTag("Scanner")) {
 
                     if (_OnEventText)

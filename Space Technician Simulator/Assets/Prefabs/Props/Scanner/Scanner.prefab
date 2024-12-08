@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7065181727069176263}
   m_Layer: 0
   m_Name: Scanner
-  m_TagString: Untagged
+  m_TagString: Scanner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   _PlayerCamera: {fileID: 0}
   _ScannerDistance: 3
   _OnEventText: {fileID: 0}
-  _ScannerSound: {fileID: 8300000, guid: 8c37354fb710c4841975decedc75b471, type: 3}
+  _ScannerSound: {fileID: 8300000, guid: 5d88e458df060b84783b2e2fbfe92318, type: 3}
 --- !u!1001 &262130373372234438
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
@@ -11,7 +9,7 @@ public class AudioManager : MonoBehaviour {
         get
         {
             if (_Instance == null)
-                Debug.LogError("AudioManager doesn't exists.");
+                return null;
             return _Instance;
         }
     }
@@ -45,5 +43,10 @@ public class AudioManager : MonoBehaviour {
         } else {
             _SFXSource.PlayOneShot(clip);
         }
+    }
+
+    public bool IsPlayingSFX(AudioClip clip)
+    {
+        return _SFXSource.clip == clip;
     }
 }

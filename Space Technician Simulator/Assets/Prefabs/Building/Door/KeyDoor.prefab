@@ -72,6 +72,10 @@ MonoBehaviour:
   _KeyInventory: {fileID: 0}
   _WaitTimer: 1
   _PauseInteraction: 0
+  _DoorOpenSound: {fileID: 8300000, guid: f9d9191c15ab4e54698052dd46479acc, type: 3}
+  _DoorCloseSound: {fileID: 8300000, guid: a15359574d35d3f469f9d403185fa70a, type: 3}
+  _DoorLockedSound: {fileID: 8300000, guid: a15359574d35d3f469f9d403185fa70a, type: 3}
+  _DoorUnlockSound: {fileID: 8300000, guid: 8c37354fb710c4841975decedc75b471, type: 3}
 --- !u!1 &3787449832426018787
 GameObject:
   m_ObjectHideFlags: 0

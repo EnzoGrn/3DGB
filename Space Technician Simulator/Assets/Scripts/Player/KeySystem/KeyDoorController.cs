@@ -28,6 +28,20 @@ namespace KeySystem {
         [SerializeField]
         private bool _PauseInteraction = false;
 
+        [Header("Audio")]
+
+        [SerializeField]
+        private AudioClip _DoorOpenSound = null;
+
+        [SerializeField]
+        private AudioClip _DoorCloseSound = null;
+
+        [SerializeField]
+        private AudioClip _DoorLockedSound = null;
+
+        [SerializeField]
+        private AudioClip _DoorUnlockSound = null;
+
         private void Awake()
         {
             _Animator = GetComponent<Animator>();
@@ -40,13 +54,16 @@ namespace KeySystem {
             }
         }
 
-        private IEnumerator PauseDoorInteraction()
+        private IEnumerator PauseDoorInteraction(bool open)
         {
             _PauseInteraction = true;
 
             yield return new WaitForSeconds(_WaitTimer);
 
             _PauseInteraction = false;
+
+            if (!open)
+                AudioManager.Instance.PlaySFX(_DoorCloseSound);
         }
 
         public void PlayAnimation()
@@ -61,20 +78,26 @@ namespace KeySystem {
         private void OpenDoor()
         {
             if (!_DoorOpen && !_PauseInteraction) {
+                AudioManager.Instance.PlaySFX(_DoorUnlockSound);
+
                 _Animator.SetTrigger("Open");
                 _DoorOpen = true;
 
-                StartCoroutine(PauseDoorInteraction());
+                AudioManager.Instance.PlaySFX(_DoorOpenSound);
+
+                StartCoroutine(PauseDoorInteraction(true));
             } else {
                 _Animator.SetTrigger("Closed");
                 _DoorOpen = false;
 
-                StartCoroutine(PauseDoorInteraction());
+                StartCoroutine(PauseDoorInteraction(false));
             }
         }
 
         private IEnumerator ShowDoorLocked()
         {
+            AudioManager.Instance.PlaySFX(_DoorLockedSound);
+
             _ShowDoorLockedUI.SetActive(true);
 
             yield return new WaitForSeconds(_TimeToShowUI);

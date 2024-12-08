@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class AreaTriggerDoor : MonoBehaviour {
 
+    [Header("Audio")]
+
+    [SerializeField]
+    private AudioClip _DoorOpenSound; // !< Door Open Sound
+
+    [SerializeField]
+    private AudioClip _DoorCloseSound; // !< Door Close Sound
+
     private Animator _Animator; // !< Door Animator
 
     private void Start()
@@ -18,6 +26,9 @@ public class AreaTriggerDoor : MonoBehaviour {
 
             // Trigger the door to open
             _Animator.SetTrigger("Open");
+
+            // Play the door open sound
+            AudioManager.Instance.PlaySFX(_DoorOpenSound);
         }
     }
 
@@ -28,6 +39,9 @@ public class AreaTriggerDoor : MonoBehaviour {
 
             // Trigger the door to close
             _Animator.SetTrigger("Closed");
+
+            // Play the door close sound
+            AudioManager.Instance.PlaySFX(_DoorCloseSound);
         }
     }
 }

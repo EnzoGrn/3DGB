@@ -10,6 +10,14 @@ public class EventTriggerDoor : MonoBehaviour {
     [SerializeField]
     private bool _IsOpen = false; // !< Door state
 
+    [Header("Audio")]
+
+    [SerializeField]
+    private AudioClip _DoorOpenSound; // !< Door Open Sound
+
+    [SerializeField]
+    private AudioClip _DoorCloseSound; // !< Door Close Sound
+
     private void Start()
     {
         _Animator = GetComponent<Animator>();
@@ -20,9 +28,16 @@ public class EventTriggerDoor : MonoBehaviour {
 
     public void OnTrigger(bool open)
     {
-        if (open)
+        _IsOpen = open;
+
+        if (open) {
             _Animator.SetTrigger("Open");
-        else
+
+            AudioManager.Instance.PlaySFX(_DoorOpenSound);
+        } else {
             _Animator.SetTrigger("Closed");
+
+            AudioManager.Instance.PlaySFX(_DoorCloseSound);
+        }
     }
 }

@@ -25,6 +25,10 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private TMPro.TextMeshPro _OnEventText;
 
+    [Header("Audio Clip")]
+    [SerializeField]
+    private AudioClip _ScannerSound;
+
     public void OnTriggerEnter(Collider other)
     {
         // If the player is around, trigger the event
@@ -62,6 +66,8 @@ public class Scanner : MonoBehaviour {
 
                     if (Input.GetKeyDown(KeyCode.E)) { // TODO: Change with InputSystem
                         _IsScanned = !_IsScanned;
+
+                        AudioManager.Instance.PlaySFX(_ScannerSound);
 
                         if (_IsScanned)
                             DoAction.Invoke(_IsScanned);

@@ -28,7 +28,7 @@ public class AreaTriggerDoor : MonoBehaviour {
             _Animator.SetTrigger("Open");
 
             // Play the door open sound
-            AudioManager.Instance.PlaySFX(_DoorOpenSound);
+            AudioManager.Instance.PlaySFX(_DoorOpenSound, transform);
         }
     }
 
@@ -41,7 +41,7 @@ public class AreaTriggerDoor : MonoBehaviour {
             _Animator.SetTrigger("Closed");
 
             // Play the door close sound
-            AudioManager.Instance.PlaySFX(_DoorCloseSound);
+            AudioManager.Instance.PlaySFX(_DoorCloseSound, transform);
         }
     }
 }

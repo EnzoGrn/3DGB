@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EventTriggerDoor : MonoBehaviour {
 
@@ -33,11 +34,11 @@ public class EventTriggerDoor : MonoBehaviour {
         if (open) {
             _Animator.SetTrigger("Open");
 
-            AudioManager.Instance.PlaySFX(_DoorOpenSound);
+            AudioManager.Instance.PlaySFX(_DoorOpenSound, transform);
         } else {
             _Animator.SetTrigger("Closed");
 
-            AudioManager.Instance.PlaySFX(_DoorCloseSound);
+            AudioManager.Instance.PlaySFX(_DoorCloseSound, transform);
         }
     }
 }

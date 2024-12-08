@@ -10,11 +10,8 @@ public class AudioManager : MonoBehaviour {
     {
         get
         {
-            if (_Instance == null) {
-                GameObject go = new("AudioManager");
-
-                _Instance = go.AddComponent<AudioManager>();
-            }
+            if (_Instance == null)
+                Debug.LogError("AudioManager doesn't exists.");
             return _Instance;
         }
     }
@@ -38,9 +35,15 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, Transform transform = null)
     {
-        if (clip != null)
+        if (clip == null)
+            return;
+
+        if (transform != null) {
+            AudioSource.PlayClipAtPoint(clip, transform.position);
+        } else {
             _SFXSource.PlayOneShot(clip);
+        }
     }
 }

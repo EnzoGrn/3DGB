@@ -63,7 +63,7 @@ namespace KeySystem {
             _PauseInteraction = false;
 
             if (!open)
-                AudioManager.Instance.PlaySFX(_DoorCloseSound);
+                AudioManager.Instance.PlaySFX(_DoorCloseSound, transform);
         }
 
         public void PlayAnimation()
@@ -78,12 +78,12 @@ namespace KeySystem {
         private void OpenDoor()
         {
             if (!_DoorOpen && !_PauseInteraction) {
-                AudioManager.Instance.PlaySFX(_DoorUnlockSound);
+                AudioManager.Instance.PlaySFX(_DoorUnlockSound, transform);
 
                 _Animator.SetTrigger("Open");
                 _DoorOpen = true;
 
-                AudioManager.Instance.PlaySFX(_DoorOpenSound);
+                AudioManager.Instance.PlaySFX(_DoorOpenSound, transform);
 
                 StartCoroutine(PauseDoorInteraction(true));
             } else {
@@ -96,7 +96,7 @@ namespace KeySystem {
 
         private IEnumerator ShowDoorLocked()
         {
-            AudioManager.Instance.PlaySFX(_DoorLockedSound);
+            AudioManager.Instance.PlaySFX(_DoorLockedSound, transform);
 
             _ShowDoorLockedUI.SetActive(true);
 

@@ -67,7 +67,7 @@ public class Scanner : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.E)) { // TODO: Change with InputSystem
                         _IsScanned = !_IsScanned;
 
-                        AudioManager.Instance.PlaySFX(_ScannerSound);
+                        AudioManager.Instance.PlaySFX(_ScannerSound, transform);
 
                         if (_IsScanned)
                             DoAction.Invoke(_IsScanned);

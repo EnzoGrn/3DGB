@@ -2,18 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.Windows;
 
 public class NpcMovement : MonoBehaviour
 {
     [SerializeField] private Transform[] _Target;
     [SerializeField] private MovementType _MovementType;
 
+    // Fall timeout variables
+    private float _fallTimeoutDelta;
+
+    // Agent stuff
     private NavMeshAgent _Agent;
     private int _CurrentTarget = 0;
     private bool _IsWaiting = false;
 
     // PingPong
     private bool _ReversedMovement = false;
+
+    // Animation IDs
+    private Animator _Animator;
+    private bool _HasAnimator;
+    private int _AnimIDSpeed;
+    private int _AnimIDGrounded;
+    private int _AnimIDJump;
+    private int _AnimIDFreeFall;
+    private int _AnimIDMotionSpeed;
+
+    // Audio
+    public AudioClip LandingAudioClip;
+    public AudioClip[] FootstepAudioClips;
+    [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
     private void OnDrawGizmos()
     {
@@ -38,16 +58,43 @@ public class NpcMovement : MonoBehaviour
 
     private void Start()
     {
+        _HasAnimator = TryGetComponent(out _Animator);
         _Agent = GetComponent<NavMeshAgent>();
         _Agent.SetDestination(_Target[_CurrentTarget].position);
+
+        AssignAnimationIDs();
     }
 
     private void Update()
     {
+        _HasAnimator = TryGetComponent(out _Animator);
+
+        HandleAnimation();
+
         if (_Agent.remainingDistance < 0.1f && !_IsWaiting)
         {
             StartCoroutine(NextTarget());
         }
+    }
+
+    private void HandleAnimation()
+    {
+        if (_HasAnimator)
+        {
+            // Debug.Log("Magnitude Velocity -> " + _Agent.velocity.magnitude);
+            _Animator.SetFloat(_AnimIDSpeed, _Agent.velocity.magnitude);
+            // Motion speed
+            _Animator.SetFloat(_AnimIDMotionSpeed, _Agent.velocity.magnitude / _Agent.speed);
+        }
+    }
+
+    private void AssignAnimationIDs()
+    {
+        _AnimIDSpeed = Animator.StringToHash("Speed");
+        _AnimIDGrounded = Animator.StringToHash("Grounded");
+        _AnimIDJump = Animator.StringToHash("Jump");
+        _AnimIDFreeFall = Animator.StringToHash("FreeFall");
+        _AnimIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     }
 
     private void PingPongNextTarget()
@@ -104,6 +151,26 @@ public class NpcMovement : MonoBehaviour
         yield return new WaitForSeconds(4f);
         _Agent.SetDestination(_Target[_CurrentTarget].position);
         _IsWaiting = false;
+    }
+
+    private void OnFootstep(AnimationEvent animationEvent)
+    {
+        if (animationEvent.animatorClipInfo.weight > 0.5f)
+        {
+            if (FootstepAudioClips.Length > 0)
+            {
+                var index = Random.Range(0, FootstepAudioClips.Length);
+                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(transform.position), FootstepAudioVolume);
+            }
+        }
+    }
+
+    private void OnLand(AnimationEvent animationEvent)
+    {
+        if (animationEvent.animatorClipInfo.weight > 0.5f)
+        {
+            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(transform.position), FootstepAudioVolume);
+        }
     }
 }
 

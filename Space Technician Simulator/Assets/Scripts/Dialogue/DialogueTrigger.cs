@@ -14,7 +14,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Awake()
     {
-        _SphereCollider = gameObject.AddComponent<SphereCollider>();
+        _SphereCollider = gameObject.GetComponent<SphereCollider>();
         _SphereCollider.radius = _DetectionRadius;
         _SphereCollider.isTrigger = true;
         IsManualDialogueActive = false;

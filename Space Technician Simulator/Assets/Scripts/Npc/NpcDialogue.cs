@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NpcDialogue : MonoBehaviour
 {
     [SerializeField] private float _DetectionRadius = 5f; // The radius to detect the player
     [SerializeField] private DialogueSO _DialogueSO; // The dialogues of a player to display
+    [SerializeField] private NpcMovement _NpcMovement;
+    [SerializeField] private TMP_Text _StartDialogueText;
 
     private bool _IsPlayerDetected = false;
     private bool _IsDialogueActive = false;
-
     private SphereCollider _SphereCollider;
-    private GameObject _Player;
 
     private void Awake()
     {
@@ -19,14 +20,26 @@ public class NpcDialogue : MonoBehaviour
         _SphereCollider.radius = _DetectionRadius;
         _SphereCollider.isTrigger = true;
 
-        // Find the player
-        _Player = GameObject.FindGameObjectWithTag("Player");
+        _StartDialogueText.text = "Press 'Return' to talk";
+        _StartDialogueText.gameObject.SetActive(false);
     }
 
     private void Start()
     {
         // Start the coroutine to register the event
         RegisterEvent();
+    }
+
+    private void Update()
+    {
+        if (_IsPlayerDetected && !_IsDialogueActive)
+        {
+            _StartDialogueText.gameObject.SetActive(true);
+        }
+        else
+        {
+            _StartDialogueText.gameObject.SetActive(false);
+        }
     }
 
     private void RegisterEvent()
@@ -74,16 +87,8 @@ public class NpcDialogue : MonoBehaviour
             }
 
             dialogueTriggerScript.EndDialogue();
+            NotifyEndManualDialogue();
         }
-    }
-
-    public void ChangeColor(bool enter)
-    {
-        // Change the color of the NPC
-        if (enter)
-            GetComponent<MeshRenderer>().material.color = Color.green;
-        else
-            GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     public void StartDialogue()
@@ -93,6 +98,11 @@ public class NpcDialogue : MonoBehaviour
         Debug.Log("Dialogue Started");
 
         _IsDialogueActive = true;
+
+        if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
+        {
+            NotifyNewManualDialogue();
+        }
 
         DialogueManager.Instance.StartDialogue(_DialogueSO);
     }
@@ -104,49 +114,56 @@ public class NpcDialogue : MonoBehaviour
         DialogueManager.Instance.NextMessage(_DialogueSO.DialogueType);
     }
 
-    private void LookAtPlayer()
-    {
-        if (!_IsPlayerDetected) return;
-
-        // Rotate the NPC to face the player
-        Vector3 direction = _Player.transform.position - transform.position;
-        direction.y = 0;
-        direction.z = 0;
-        transform.rotation = Quaternion.LookRotation(direction);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Player detected");
-
             _IsPlayerDetected = true;
-            _IsDialogueActive = true;
-        
-            DialogueManager.Instance.StartDialogue(_DialogueSO);
+
+            if (!_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+            {
+                _IsDialogueActive = true;
+                DialogueManager.Instance.StartDialogue(_DialogueSO);
+                Debug.Log("Player entered auto dialogue");
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
         {
-            LookAtPlayer();
+            _NpcMovement.LookAtPlayer();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Player left");
-
             _IsPlayerDetected = false;
-            _IsDialogueActive = false;
 
-            DialogueManager.Instance.EndDialogue(_DialogueSO.DialogueType);
+            if (_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+            {
+                _IsDialogueActive = false;
+                DialogueManager.Instance.EndDialogue(_DialogueSO.DialogueType);
+                Debug.Log("Player left auto dialogue");
+            }
         }
+    }
+
+    // Notify the NPC to stop moving for manual dialogue
+    public void NotifyNewManualDialogue()
+    {
+        _NpcMovement._CanMove = false;
+        Debug.Log("Stop Npc");
+    }
+
+    // Notify the NPC to start moving again after manual dialogue
+    public void NotifyEndManualDialogue()
+    {
+        _NpcMovement._CanMove = true;
+        Debug.Log("Start Npc");
     }
 
     private void OnDestroy()

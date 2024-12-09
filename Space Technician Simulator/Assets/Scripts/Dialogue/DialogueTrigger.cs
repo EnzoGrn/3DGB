@@ -27,6 +27,7 @@ public class DialogueTrigger : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && !IsManualDialogueActive)
         {
             _NpcDialogue.StartDialogue();
+            _SphereCollider.radius = _DetectionRadius + 1;
             IsManualDialogueActive = true;
         }
         else if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && IsManualDialogueActive)
@@ -34,32 +35,37 @@ public class DialogueTrigger : MonoBehaviour
             // Continue the dialogue
             _NpcDialogue.NextMessageDialogue();
         }
+
+        // LookAtNpc();
     }
 
     public void EndDialogue()
     {
-        IsManualDialogueActive = false;
+        if (IsManualDialogueActive)
+        {
+            _SphereCollider.radius = _DetectionRadius;
+            IsManualDialogueActive = false;
+        }
     }
 
-    private void OnDrawGizmos()
+    public void LookAtNpc()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _DetectionRadius);
+        if (_NpcDialogue == null || !IsManualDialogueActive) return;
+
+        // Rotate the NPC to face the player
+        Vector3 direction = _NpcDialogue.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter + " + other.name);
-
+        // If the player is already in dialogue with a NPC, return
         if (_NpcDialogue != null) return;
 
         if (other.CompareTag("ManualDialogue"))
         {
-            Debug.Log("ManualDialogue Detected");
-
+            Debug.Log("ManualDialogue Detected Store Object");
             _NpcDialogue = other.GetComponent<NpcDialogue>();
-            // Chnage the color of the NPC
-            _NpcDialogue.ChangeColor(true);
         }
     }
 
@@ -69,10 +75,14 @@ public class DialogueTrigger : MonoBehaviour
 
         if (other.CompareTag("ManualDialogue"))
         {
-            Debug.Log("ManualDialogue Left");
-
-            _NpcDialogue.ChangeColor(false);
+            Debug.Log("ManualDialogue Exit");
             _NpcDialogue = null;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _DetectionRadius);
     }
 }

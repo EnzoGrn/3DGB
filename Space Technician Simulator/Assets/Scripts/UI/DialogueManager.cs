@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -78,13 +78,31 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueCamera FindDialogueCamera(int actorId)
     {
+        Debug.Log("Lenght of _DialogueCamera " + _DialogueCamera.Length);
+
         foreach (DialogueCamera dialogueCamera in _DialogueCamera)
         {
+        
+            Debug.Log("try to get dialogueCamera !!!!!!!!!!!! " + dialogueCamera.ActorIndex);
+
+        }
+
+            foreach (DialogueCamera dialogueCamera in _DialogueCamera)
+        {
+            Debug.Log("try to get dialogueCamera " + dialogueCamera.ActorIndex);
+
+            if (dialogueCamera.Camera == null)
+            {
+                Debug.LogError("Dialogue Camera is null");
+            }
+
             if (dialogueCamera.ActorIndex == actorId)
             {
                 return dialogueCamera;
             }
         }
+
+        Debug.LogWarning("Dialogue Camera not found for actorId -> " + actorId);
 
         return null;
     }
@@ -93,6 +111,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (_DialogueCameraActive != null && _DialogueCameraActive.ActorIndex == message.actorId) return;
 
+        Debug.Log("FindDialogueCamera message.actorId -> " + message.actorId);
+
         DialogueCamera dialogueCamera = FindDialogueCamera(message.actorId);
 
         if (_DialogueCameraActive != null)
@@ -100,6 +120,9 @@ public class DialogueManager : MonoBehaviour
             _DialogueCameraActive.DisableDialogueCamera();
         }
         _DialogueCameraActive = dialogueCamera;
+
+        Debug.Log("Dialogue -> " + _DialogueCameraActive);
+        Debug.Log("_Player -> " + _Player.transform);
 
         if (message.toLookId == 0)
         {

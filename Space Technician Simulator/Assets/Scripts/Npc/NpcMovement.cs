@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Windows;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class NpcMovement : MonoBehaviour
 {
+    [SerializeField] public bool _CanMove = true;
     [SerializeField] private Transform[] _Target;
     [SerializeField] private MovementType _MovementType;
 
@@ -34,6 +36,14 @@ public class NpcMovement : MonoBehaviour
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
+
+    private GameObject _Player;
+
+    private void Awake()
+    {
+        // Find the player
+        _Player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void OnDrawGizmos()
     {
@@ -71,9 +81,37 @@ public class NpcMovement : MonoBehaviour
 
         HandleAnimation();
 
+        SwitchAgent();
+
+        if (!_CanMove)
+        {
+            LookAtPlayer();
+        }
+
+
         if (_Agent.remainingDistance < 0.1f && !_IsWaiting)
         {
             StartCoroutine(NextTarget());
+        }
+    }
+
+    public void LookAtPlayer()
+    {
+        // Rotate the NPC to face the player
+        Vector3 direction = _Player.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    private void SwitchAgent()
+    {
+        if (!_CanMove && !_Agent.isStopped)
+        {
+            // Pause the agent
+            _Agent.isStopped = true;
+        }
+        else if (_CanMove && _Agent.isStopped)
+        {
+            _Agent.isStopped = false;
         }
     }
 

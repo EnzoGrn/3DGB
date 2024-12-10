@@ -33,15 +33,15 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void PlaySFX(AudioClip clip, Transform transform = null)
+    public void PlaySFX(AudioClip clip, Transform transform = null, float volume = 1f)
     {
         if (clip == null)
             return;
 
         if (transform != null) {
-            AudioSource.PlayClipAtPoint(clip, transform.position);
+            AudioSource.PlayClipAtPoint(clip, transform.position, volume);
         } else {
-            _SFXSource.PlayOneShot(clip);
+            _SFXSource.PlayOneShot(clip, volume);
         }
     }
 

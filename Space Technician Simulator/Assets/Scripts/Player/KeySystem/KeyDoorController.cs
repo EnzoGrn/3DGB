@@ -6,7 +6,6 @@ namespace KeySystem {
 
     public class KeyDoorController : MonoBehaviour
     {
-
         private Animator _Animator;
 
         [Header("Door Settings")]

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: DialogueTestManual
+  m_EditorClassIdentifier: 
+  Messages:
+  - actorId: 2
+    message: Hello I am here to help you !
+    toLookId: 0
+  - actorId: 0
+    message: Thank you !
+    toLookId: 2
+  - actorId: 2
+    message: You can find it in the room next to the kitchen
+    toLookId: 0
+  - actorId: 2
+    message: You have to find the red key to open this door
+    toLookId: 0
+  - actorId: 2
+    message: You have to find the red key to open this door
+    toLookId: 0
+  - actorId: 0
+    message: Thank you !
+    toLookId: 2
+  DialogueType: 1

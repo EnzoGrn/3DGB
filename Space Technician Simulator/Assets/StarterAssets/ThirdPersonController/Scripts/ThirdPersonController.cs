@@ -75,6 +75,10 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        // Add the Dialogue Trigger here to avoid moving player when ManualDialogue is active
+        [Header("Dialogue Trigger")]
+        [SerializeField] private DialogueTrigger _DialogueTrigger;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -156,14 +160,40 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (!_DialogueTrigger.IsManualDialogueActive)
+            {
+                GroundedCheck();
+                JumpAndGravity();
+                Move();
+            }
+            else
+            {
+                // Allow the player to fall due to gravity
+                GroundedCheck();
+                JumpAndGravity();
+                MoveDuringDialogue(); // Restrict movement to vertical only
+            }
         }
 
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void MoveDuringDialogue()
+        {
+            // Only apply vertical movement (gravity)
+            Vector3 targetDirection = new Vector3(0.0f, _verticalVelocity, 0.0f);
+
+            // Move the character controller
+            _controller.Move(targetDirection * Time.deltaTime);
+
+            // Ensure animator shows idle state
+            if (_hasAnimator)
+            {
+                _animator.SetFloat(_animIDSpeed, 0f);
+                _animator.SetFloat(_animIDMotionSpeed, 0f);
+            }
         }
 
         private void AssignAnimationIDs()
@@ -300,7 +330,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f && !_DialogueTrigger.IsManualDialogueActive)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);

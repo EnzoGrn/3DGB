@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -9,6 +7,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private SphereCollider _SphereCollider;
     private NpcDialogue _NpcDialogue;
+    [SerializeField] private GameObject _Player;
 
     public bool IsManualDialogueActive;
 
@@ -23,20 +22,25 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Putain Ici");
+
         // Check enter key input
         if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && !IsManualDialogueActive)
         {
+            Debug.Log("Return pressed ! Start Dialogue");
+
             _NpcDialogue.StartDialogue();
             _SphereCollider.radius = _DetectionRadius + 1;
             IsManualDialogueActive = true;
         }
         else if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && IsManualDialogueActive)
         {
+            Debug.Log("NextDialogue");
+
             // Continue the dialogue
             _NpcDialogue.NextMessageDialogue();
         }
-
-        // LookAtNpc();
+        LookAtNpc();
     }
 
     public void EndDialogue()
@@ -52,9 +56,16 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (_NpcDialogue == null || !IsManualDialogueActive) return;
 
+
         // Rotate the NPC to face the player
         Vector3 direction = _NpcDialogue.transform.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(direction);
+
+        Debug.Log("_NpcDialogue.transform.position -> " + _NpcDialogue.transform.position);
+        Debug.Log("Player should look at the LookAtNpc -> " + direction);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        _Player.gameObject.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+
+        // _Player.gameObject.transform.rotation = Quaternion.LookRotation(direction);
     }
 
     private void OnTriggerEnter(Collider other)

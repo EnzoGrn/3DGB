@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActorIndex: 0
-  _DialogueCamera: {fileID: 3980697786459340622}
+  Camera: {fileID: 0}
 --- !u!1 &557505583043099846
 GameObject:
   m_ObjectHideFlags: 0

@@ -99,7 +99,9 @@ public class NpcMovement : MonoBehaviour
     {
         // Rotate the NPC to face the player
         Vector3 direction = _Player.transform.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(direction);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+
     }
 
     private void SwitchAgent()

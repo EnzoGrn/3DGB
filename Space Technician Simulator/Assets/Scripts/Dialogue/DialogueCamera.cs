@@ -18,16 +18,31 @@ public class DialogueCamera : MonoBehaviour
         Camera.gameObject.SetActive(true);
         Camera.enabled = true;
 
-        // Set the camera position above the other object
-        // Convert Camera position to the parent gameObjects local space
+        // Check the distance between 2 objects, if too close then move the camera to the side to see both players
+        float distance = Vector3.Distance(sourcePosition.position, transform.position);
 
-        // Set the camera position above the source object
+        if (distance < 1.5f)
+        {
+            float x = transform.position.x + Mathf.Cos(45) * 3f;
+            float z = transform.position.z + Mathf.Sin(45) * 3f;
+        
+            Camera.transform.position = new Vector3(x, 1.7f, z);
 
-        Camera.transform.position = new Vector3(sourcePosition.position.x, 1.5f, sourcePosition.position.z);
-
-        // Look at the trnasform of actual game object + height of the objetc to see the head
-        Camera.transform.LookAt(transform.position + Vector3.up);
-
+            // Look at the middle point between the 2 objects
+            Vector3 lookAt = (sourcePosition.position + transform.position) / 2;
+            lookAt.y += 1.7f;
+            Camera.transform.LookAt(lookAt);
+        }
+        else
+        {
+            Camera.transform.position = new Vector3(sourcePosition.position.x, 1.7f, sourcePosition.position.z);
+            Vector3 lookAt = transform.position;
+            lookAt.y += 1.7f;
+            Camera.transform.LookAt(lookAt);
+        }
+        
+        
+        // Camera.transform.LookAt(transform.position + Vector3.up);
     }
 
     public void DisableDialogueCamera()

@@ -60,8 +60,6 @@ public class DialogueTrigger : MonoBehaviour
         // Rotate the NPC to face the player
         Vector3 direction = _NpcDialogue.transform.position - transform.position;
 
-        Debug.Log("_NpcDialogue.transform.position -> " + _NpcDialogue.transform.position);
-        Debug.Log("Player should look at the LookAtNpc -> " + direction);
         Quaternion rotation = Quaternion.LookRotation(direction);
         _Player.gameObject.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 

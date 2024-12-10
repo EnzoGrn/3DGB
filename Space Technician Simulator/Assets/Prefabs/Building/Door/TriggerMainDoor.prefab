@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsOpen: 0
+  _DoorOpenSound: {fileID: 8300000, guid: e295fe2bf9f11154a8f269b199417d15, type: 3}
+  _DoorCloseSound: {fileID: 8300000, guid: 5231edfb9c5ebbf449b5e2547931a3e2, type: 3}
 --- !u!1001 &7890554346950573131
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3029,6 +3029,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5f4daf24146ee040b5a2d7a73b30aa0, type: 3}
+--- !u!1 &1059736671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6448695903584099781, guid: 7134d1b079bab07438cd9cae394f8ff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 234973706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1114236132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,6 +3629,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7639352019504543191, guid: 4ac72ce9d956e31499dd48cabac16ff2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3905,7 +3931,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _HintKeyBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1059736671}
     - target: {fileID: 2730126940818421948, guid: e7f2b950a777b77488d0d4192a7def1e,
         type: 3}
       propertyPath: _DialogueBox

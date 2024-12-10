@@ -4,35 +4,61 @@ using System.Collections.Generic;
 
 public class QuestUIManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text questLogText;
+    [SerializeField] private GameObject questListItem;
     [SerializeField] private List<Quest> _quests = new List<Quest>();
-
-    private void OnEnable()
-    {
-        QuestManager.Instance.OnQuestAdded += UpdateQuestList;
-        Debug.Log("QuestUIManager enabled");
-    }
 
     private void OnDisable()
     {
         QuestManager.Instance.OnQuestAdded -= UpdateQuestList;
+        QuestManager.Instance.OnQuestRemoved -= RemoveQuest;
         Debug.Log("QuestUIManager disabled");
     }
 
-    private void UpdateQuestList(List<Quest> quests)
+    private void Start()
     {
-        _quests = quests;
-        Debug.Log(quests.Count + " quests in list");
+        QuestManager.Instance.OnQuestAdded += UpdateQuestList;
+        QuestManager.Instance.OnQuestRemoved += RemoveQuest;
+        Debug.Log("QuestUIManager started");
+    }
+
+    private void UpdateQuestList(Quest quest)
+    {
+        _quests.Add(quest);
+
+        quest.OnStepUpdated += UpdateQuestStep;
+        GameObject questPanel = Instantiate(questListItem, transform);
+        string questName = quest.DisplayName;
+        Debug.Log(quest.QuestInfo.questSteps.Count + " steps in quest");
+        if (quest.QuestInfo.questSteps.Count > 0 ) {
+            questName = quest.QuestInfo.questSteps[quest.CurrentStepIndex].title;
+        }
+        questPanel.transform.GetComponentInChildren<TextMeshProUGUI>().text = questName;
+        questPanel.name = quest.Id.ToString();
+        Debug.Log(_quests.Count + " quests in list");
         Debug.Log("Quest list updated");
     }
 
-    private void Update()
+    private void UpdateQuestStep(Quest quest, int stepIndex)
     {
-        questLogText.text = string.Empty;
-        foreach (Quest quest in _quests)
+        Transform questPanel = transform.Find(quest.Id.ToString());
+        if (questPanel != null)
         {
-            Debug.Log("Quest: " + quest.DisplayName);
-            questLogText.text += quest.DisplayName + "\n";
+            questPanel.GetComponentInChildren<TextMeshProUGUI>().text = quest.QuestInfo.questSteps[stepIndex].title;
         }
+    }
+
+    private void RemoveQuest(Quest quest)
+    {
+        _quests.Remove(quest);
+
+        // Trouver le panneau associé
+        Transform questPanel = transform.Find(quest.Id.ToString());
+        if (questPanel != null)
+        {
+            Destroy(questPanel.gameObject);
+        }
+
+        Debug.Log(_quests.Count + " quests in list after removal");
+        Debug.Log("Quest removed");
     }
 }

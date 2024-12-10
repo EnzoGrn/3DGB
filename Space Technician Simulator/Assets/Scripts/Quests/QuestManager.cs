@@ -9,7 +9,8 @@ public class QuestManager : MonoBehaviour
     private List<Quest> activeQuests = new List<Quest>();
     private List<Quest> completedQuests = new List<Quest>();
 
-    public event System.Action<List<Quest>> OnQuestAdded;
+    public event System.Action<Quest> OnQuestAdded;
+    public event System.Action<Quest> OnQuestRemoved;
 
     private void Awake()
     {
@@ -26,26 +27,31 @@ public class QuestManager : MonoBehaviour
     public void StartQuest(QuestInfoSO questInfo)
     {
         if (questInfo == null) return;
-        Debug.Log("Starting quest: " + questInfo.displayName);
         Quest newQuest = new Quest(questInfo);
-        foreach (GameObject step in questInfo.questStepPrefabs)
+        foreach (QuestStep step in questInfo.questSteps)
         {
-            NPCInteractionHandler nPCInteractionHandler = step.GetComponent<NPCInteractionHandler>();
+            GameObject stepInstance = Instantiate(step.prefab, step.prefab.transform.position, Quaternion.identity);
+            NPCInteractionHandler nPCInteractionHandler = stepInstance.GetComponent<NPCInteractionHandler>();
             if (nPCInteractionHandler != null)
             {
                 nPCInteractionHandler.Initialize(newQuest);
             }
+            else
+            {
+                Debug.LogWarning($"No NPCInteractionHandler found on {step.prefab.name}");
+            }
         }
         newQuest.OnQuestCompleted += HandleQuestCompleted;
         activeQuests.Add(newQuest);
-        OnQuestAdded?.Invoke(activeQuests);
+        OnQuestAdded?.Invoke(newQuest);
     }
 
     private void HandleQuestCompleted(Quest quest)
     {
         activeQuests.Remove(quest);
+        OnQuestRemoved?.Invoke(quest);
         Debug.Log("Quest completed: " + quest.DisplayName);
-        OnQuestAdded?.Invoke(activeQuests);
+        //OnQuestAdded?.Invoke(quest);
         completedQuests.Add(quest);
     }
 

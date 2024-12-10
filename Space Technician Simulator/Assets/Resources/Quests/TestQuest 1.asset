@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: TestQuest 1
   displayName: Test my quest system 2
-  questStepPrefabs:
-  - {fileID: 595675443819916803, guid: 827b6f86788ee0848b70ccf67b3b03ca, type: 3}
+  description: 
+  startMessage: 
+  endMessage: 
+  questSteps: []

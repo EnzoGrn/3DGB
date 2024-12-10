@@ -10,6 +10,7 @@ public class Quest
     public event Action<Quest> OnQuestCompleted;
     public event Action<Quest, int> OnStepUpdated;
     public string DisplayName => QuestInfo.displayName;
+    public int Id => QuestInfo.GetInstanceID();
 
     public Quest(QuestInfoSO questInfo)
     {
@@ -21,7 +22,7 @@ public class Quest
         if (IsCompleted) return;
 
         CurrentStepIndex++;
-        if (CurrentStepIndex >= QuestInfo.questStepPrefabs.Length)
+        if (CurrentStepIndex >= QuestInfo.questSteps.Count)
         {
             CompleteQuest();
         }

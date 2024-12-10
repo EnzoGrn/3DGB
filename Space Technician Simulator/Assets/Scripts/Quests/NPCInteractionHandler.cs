@@ -3,7 +3,8 @@ using UnityEngine;
 public class NPCInteractionHandler : MonoBehaviour
 {
     [SerializeField] private string npcName;
-    private Quest currentQuest;
+    [SerializeField] private Quest currentQuest;
+    private bool IsInteracting = false;
 
     public void Initialize(Quest quest)
     {
@@ -29,18 +30,20 @@ public class NPCInteractionHandler : MonoBehaviour
     private void ShowInteractionPrompt()
     {
         Debug.Log($"Press 'E' to talk to {npcName}");
+        IsInteracting = true;
         // Tu peux afficher un UI ici.
     }
 
     private void HideInteractionPrompt()
     {
         Debug.Log("Interaction ended");
+        IsInteracting = false;
         // Cache l'UI ici.
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && currentQuest != null)
+        if (Input.GetKeyDown(KeyCode.E) && currentQuest != null && IsInteracting)
         {
             CompleteInteraction();
         }

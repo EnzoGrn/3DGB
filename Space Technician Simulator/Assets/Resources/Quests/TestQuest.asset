@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <id>k__BackingField: TestQuest
   displayName: Test my quest system
-  questStepPrefabs:
-  - {fileID: 595675443819916803, guid: 827b6f86788ee0848b70ccf67b3b03ca, type: 3}
+  description: 
+  startMessage: Bienvenue dans cette phase de test
+  endMessage: "Bravo, vous avez r\xE9ussi."
+  questSteps:
+  - title: "Parler \xE0 Bob"
+    completionMessage: "Excellent, maintenant allez parler \xE0 pasBob"
+    prefab: {fileID: 595675443819916803, guid: 827b6f86788ee0848b70ccf67b3b03ca, type: 3}
+  - title: "Parler \xE0 pasBob"
+    completionMessage: 
+    prefab: {fileID: 7718776205754014279, guid: a7122841454a15b40b1a46e33c360834,
+      type: 3}

@@ -23,7 +23,24 @@ public class Waypoint : MonoBehaviour
 
     private void Start()
     {
-        // Search the camera into the player children
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+        mainCamera = player.GetComponentInChildren<Camera>();
+        if (player == null)
+        {
+            Debug.LogError("Player not found");
+        }
+        ChangeView changeView = player.GetComponent<ChangeView>();
+        if (changeView != null)
+        {
+            changeView.OnCameraChanged += SetCamera;
+        }
+    }
+
+    private void SetCamera()
+    {
         mainCamera = player.GetComponentInChildren<Camera>();
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuestStep
 {
     public string title; // Le titre de l'étape
-    [TextArea] public string completionMessage; // Le message affiché à la fin de l'étape
+    public DialogueSO completionDialogue; // Le message affiché à la fin de l'étape
     public GameObject prefab; // Le prefab associé à l'étape (facultatif)
 }
 
@@ -20,8 +20,8 @@ public class QuestInfoSO : ScriptableObject
     public string description;
 
     [Header("Quest Messages")]
-    public string startMessage; // Message de début
-    public string endMessage;   // Message de fin
+    public DialogueSO startDialogue;
+    public DialogueSO endDialogue;
 
     [Header("Steps")]
     public List<QuestStep> questSteps = new List<QuestStep>();

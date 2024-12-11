@@ -22,8 +22,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Putain Ici");
-
         // Check enter key input
         if (Input.GetKeyDown(KeyCode.Return) && _NpcDialogue != null && !IsManualDialogueActive)
         {

@@ -8,7 +8,7 @@ public class IdleBehaviourNpc : StateMachineBehaviour
     [SerializeField] private float _TimeBeforeIdle = 0;
     [SerializeField] private bool _IsIdle = false;
     
-    private readonly int _MaxIdle = 2;
+    private readonly int _MaxIdle = 9;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,7 +16,8 @@ public class IdleBehaviourNpc : StateMachineBehaviour
         Debug.Log("IdleBehaviourNpc: OnStateEnter");
         ResetIdle(animator);
 
-        int id = Random.Range(1, _MaxIdle + 1);
+        int id = Random.Range(0, _MaxIdle);
+
 
         Debug.Log("IdleAnimation -> " + id);
         animator.SetFloat("IdleAnimation", id);
@@ -25,22 +26,6 @@ public class IdleBehaviourNpc : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log("IdleBehaviourNpc: OnStateUpdate -> " + stateInfo.normalizedTime);
-        //if (!_IsIdle)
-        //{
-        //    _TimeBeforeIdle += Time.deltaTime;
-        //    if (_TimeBeforeIdle >= _TimeBeforeAnimation)
-        //    {
-        //        _IsIdle = true;
-
-        //        int id = Random.Range(1, _MaxIdle + 1);
-
-        //        Debug.Log("IdleAnimation -> " + id);
-        //        animator.SetFloat("IdleAnimation", id);
-        //    }
-        //}
-        // check stateInfo.normalizedTime to see if the animation is finished
-        //else
         if (stateInfo.normalizedTime % 1 > 0.98)
         {
             Debug.Log("ResetIdle");

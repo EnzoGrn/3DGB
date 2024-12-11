@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6488101522522037259}
   - component: {fileID: 5429297444959693368}
   - component: {fileID: 4192618572826396586}
+  - component: {fileID: 5249436634494036905}
   m_Layer: 0
   m_Name: NPCQuest (1)
   m_TagString: Untagged
@@ -119,3 +120,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: pasBob
+  waypoint: {fileID: 0}
+  waypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
+    type: 3}
+  WaypointParent: {fileID: 0}
+--- !u!114 &5249436634494036905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718776205754014279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7624f2b7e9eb644bb5cb408bc1d627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5545446314263682665}
+  offset: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}

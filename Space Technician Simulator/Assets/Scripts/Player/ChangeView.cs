@@ -22,6 +22,8 @@ public class ChangeView : MonoBehaviour
 
     private StarterAssetsInputs _input;
 
+    public event System.Action OnCameraChanged;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,8 @@ public class ChangeView : MonoBehaviour
                 firstPersonController.enabled = false;
                 thirdPersonController.enabled = true;
             }
+            // invoke the OnCameraChanged event
+            OnCameraChanged?.Invoke();
             _input.view = false;
         }
     }

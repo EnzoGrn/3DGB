@@ -4402,7 +4402,7 @@ GameObject:
   - component: {fileID: 6558470411373095538}
   - component: {fileID: 8453549093247814325}
   m_Layer: 8
-  m_Name: Npc
+  m_Name: NPC
   m_TagString: ManualDialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4438,7 +4438,7 @@ Animator:
   m_GameObject: {fileID: 5076609986148537962}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c8c20564eb982f84a96a0d4d8e357cc5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
+  m_Controller: {fileID: 9100000, guid: ade4ec5c938412b4099b98ab97fdc052, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

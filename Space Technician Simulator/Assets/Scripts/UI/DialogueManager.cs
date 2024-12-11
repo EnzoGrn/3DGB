@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     private int _ActiveMessageIndex;
     private bool _IsDialogueActive;
-    
+
     private Coroutine _MessageCoroutine;
 
     public static DialogueManager Instance;
@@ -36,16 +36,6 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        // Deactivate the dialogue box
-        _DialogueBox.SetActive(false);
-        _HintKeyBox.SetActive(false);
-        _IsDialogueActive = false;
-        _MessageCoroutine = null;
-        _ActiveMessageIndex = 0;
-    }
-
-    private void Start()
-    {
         if (Instance == null)
         {
             Instance = this;
@@ -54,6 +44,12 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this);
         }
+        // Deactivate the dialogue box
+        if (_DialogueBox) _DialogueBox.SetActive(false);
+        if (_HintKeyBox) _HintKeyBox.SetActive(false);
+        _IsDialogueActive = false;
+        _MessageCoroutine = null;
+        _ActiveMessageIndex = 0;
     }
 
     public void StartDialogue(DialogueSO dialogues)
@@ -82,7 +78,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach (DialogueCamera dialogueCamera in _DialogueCamera)
         {
-        
+
             Debug.Log("try to get dialogueCamera !!!!!!!!!!!! " + dialogueCamera.ActorIndex);
 
         }
@@ -158,7 +154,7 @@ public class DialogueManager : MonoBehaviour
         if (actor.actorName != _Name.text)
         {
             _Name.text = actor.actorName;
-        
+
             if (message.actorId == 0)
             {
                 _Name.color = Color.green;
@@ -198,7 +194,7 @@ public class DialogueManager : MonoBehaviour
         {
             DisplayMessage(dialogueType);
         }
-        else 
+        else
         {
             EndDialogue(dialogueType);
         }
@@ -223,6 +219,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         OnDialogueEnded?.Invoke();
+    }
+
+    public void SetDialogueActive(bool value)
+    {
+        _IsDialogueActive = value;
     }
 }
 

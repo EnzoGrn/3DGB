@@ -9,15 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a844462d3e14e714ca085a22dffff824, type: 3}
-  m_Name: Actors
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: QuestStepDialogueTest
   m_EditorClassIdentifier: 
-  Actors:
-  - actorId: 0
-    actorName: You
-  - actorId: 1
-    actorName: Alfredo
-  - actorId: 2
-    actorName: Sarah
+  Messages:
   - actorId: 3
-    actorName: Lt. Stevens
+    message: Great! Now go to talk with pasBob
+    toLookId: 0
+  DialogueType: 0

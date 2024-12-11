@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a895bc0ceb444cb4aa0740818b8b8ec2, type: 3}
-  m_Name: TestQuest 1
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: QuestDialogueTestEnd
   m_EditorClassIdentifier: 
-  <id>k__BackingField: TestQuest 1
-  displayName: Test my quest system 2
-  description: 
-  startMessage: 
-  endMessage: 
-  questSteps: []
+  Messages:
+  - actorId: 3
+    message: Excellent, see you!
+    toLookId: 0
+  DialogueType: 0

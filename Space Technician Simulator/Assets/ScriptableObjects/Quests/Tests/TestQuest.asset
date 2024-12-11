@@ -15,13 +15,14 @@ MonoBehaviour:
   <id>k__BackingField: TestQuest
   displayName: Test my quest system
   description: 
-  startMessage: Bienvenue dans cette phase de test
-  endMessage: "Bravo, vous avez r\xE9ussi."
+  startDialogue: {fileID: 11400000, guid: ec4ca4430ecfbf84e9497f1bc9d57b07, type: 2}
+  endDialogue: {fileID: 11400000, guid: 06f926f68a46ad044b201b8df7511976, type: 2}
   questSteps:
   - title: "Parler \xE0 Bob"
-    completionMessage: "Excellent, maintenant allez parler \xE0 pasBob"
+    completionDialogue: {fileID: 11400000, guid: 21ff450581e5bd345921f3a27b255db3,
+      type: 2}
     prefab: {fileID: 595675443819916803, guid: 827b6f86788ee0848b70ccf67b3b03ca, type: 3}
   - title: "Parler \xE0 pasBob"
-    completionMessage: 
+    completionDialogue: {fileID: 0}
     prefab: {fileID: 7718776205754014279, guid: a7122841454a15b40b1a46e33c360834,
       type: 3}

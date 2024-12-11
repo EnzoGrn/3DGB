@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
   m_Name: GoToMachineRoom
   m_EditorClassIdentifier: 
-  Messages: []
+  Messages:
+  - actorId: 4
+    message: Head for the base's machine room. Reinstall it and restart the main
+      generator.
+    toLookId: 0
   DialogueType: 0

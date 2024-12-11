@@ -29,7 +29,8 @@ MonoBehaviour:
     completionDialogue: {fileID: 11400000, guid: df8f15b5af3581d4eb6deda22d2c47d3,
       type: 2}
     prefab: {fileID: 0}
-  - title: Find Mark at the restaurant
-    completionDialogue: {fileID: 0}
+  - title: Find Mark at the workshop
+    completionDialogue: {fileID: 11400000, guid: ebeb9b44536d4d54dbb5ea3e274a33e9,
+      type: 2}
     prefab: {fileID: 8507689175550021813, guid: 1f9217f9ce5425f40bf35a801212f0be,
       type: 3}

@@ -300,6 +300,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 348768877317523030}
+    - targetCorrespondingSourceObject: {fileID: 5076609986148537962, guid: bbc74bc5fe4003f49a21ac918840d6d4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4751790117194249679}
   m_SourcePrefab: {fileID: 100100000, guid: bbc74bc5fe4003f49a21ac918840d6d4, type: 3}
 --- !u!4 &4279832223548504254 stripped
 Transform:
@@ -326,8 +330,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _QuestManagerUI: {fileID: 0}
-  _FusePickedUp: 0
+  FusePickedUp: 0
   _HasFuseDialog: {fileID: 11400000, guid: 1ad702b6239985a46bc4aa59f24c70f7, type: 2}
   _NoFuseDialog:
   - {fileID: 11400000, guid: 6d4ea240eddf7a044aff8acc9b7c962f, type: 2}
   - {fileID: 11400000, guid: 17f8dd5ee3b6ce2438cdbbeb116da068, type: 2}
+--- !u!114 &-4751790117194249679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507689175550021813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7624f2b7e9eb644bb5cb408bc1d627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 4279832223548504254}
+  offset: {x: 0, y: 0, z: 0}
+  isDisabled: 1

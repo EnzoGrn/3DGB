@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class Waypoint : MonoBehaviour
 {
     // Parent GameObject contenant l'icône et le texte
-    public GameObject waypointUI;
+    private GameObject waypointUI;
     // Icone du waypoint
-    public Image img;
+    private Image img;
     // La cible (ennemi, objet, etc.)
     public Transform target;
     // TextMeshPro pour afficher la distance
-    public TextMeshProUGUI meter;
+    private TextMeshProUGUI meter;
     // Pour ajuster la position de l'icône et du texte
     public Vector3 offset;
 
@@ -29,6 +29,7 @@ public class Waypoint : MonoBehaviour
 
     private void Update()
     {
+        if (target == null || waypointUI == null) return;
         // Calculer la position à l'écran de la cible
         Vector3 targetScreenPos = mainCamera.WorldToScreenPoint(target.position + offset);
 
@@ -85,5 +86,15 @@ public class Waypoint : MonoBehaviour
 
         // Déplacer l'ensemble de l'objet UI à la position calculée
         waypointUI.transform.position = targetScreenPos;
+    }
+
+    public void SetWaypointUI(GameObject waypointUI)
+    {
+        this.waypointUI = waypointUI;
+        // Get the Image component in children (the first child)
+        Debug.Log("waypointUI: " + waypointUI.name); // Output: "waypointUI: WaypointUI
+        img = waypointUI.GetComponentInChildren<Image>();
+        meter = waypointUI.GetComponentInChildren<TextMeshProUGUI>();
+        waypointUI.SetActive(false);
     }
 }

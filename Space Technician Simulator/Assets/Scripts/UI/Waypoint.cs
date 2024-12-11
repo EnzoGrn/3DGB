@@ -17,16 +17,15 @@ public class Waypoint : MonoBehaviour
     // Pour ajuster la position de l'icône et du texte
     public Vector3 offset;
 
-    public GameObject player; // Référence au joueur
+    private GameObject player; // Référence au joueur
 
     private Camera mainCamera;
 
+    [SerializeField] public bool isDisabled;
+
     private void Start()
     {
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
         mainCamera = player.GetComponentInChildren<Camera>();
         if (player == null)
         {
@@ -37,6 +36,7 @@ public class Waypoint : MonoBehaviour
         {
             changeView.OnCameraChanged += SetCamera;
         }
+        isDisabled = false;
     }
 
     private void SetCamera()
@@ -54,7 +54,7 @@ public class Waypoint : MonoBehaviour
         bool isTargetVisible = IsTargetVisible(targetScreenPos);
 
         // Montrer ou cacher l'objet parent contenant l'icône et le texte
-        waypointUI.SetActive(isTargetVisible);
+        waypointUI.SetActive(isTargetVisible && !isDisabled);
 
         if (isTargetVisible)
         {
@@ -109,9 +109,21 @@ public class Waypoint : MonoBehaviour
     {
         this.waypointUI = waypointUI;
         // Get the Image component in children (the first child)
-        Debug.Log("waypointUI: " + waypointUI.name); // Output: "waypointUI: WaypointUI
         img = waypointUI.GetComponentInChildren<Image>();
         meter = waypointUI.GetComponentInChildren<TextMeshProUGUI>();
         waypointUI.SetActive(false);
+    }
+
+    public void DestroyWaypoint()
+    {
+        isDisabled = true;
+        if (waypointUI != null)
+        {
+            Destroy(waypointUI);
+        }
+        else
+        {
+            Debug.LogWarning("No waypoint to destroy");
+        }
     }
 }

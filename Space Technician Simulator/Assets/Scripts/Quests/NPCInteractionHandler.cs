@@ -9,12 +9,13 @@ public class NPCInteractionHandler : MonoBehaviour
     // THE CODE BELOW IS NECESSARY FOR THE WAYPOINT SYSTEM
     [SerializeField] private GameObject waypoint;
     public GameObject waypointPrefab;
-    public GameObject WaypointParent;
+    private GameObject WaypointParent;
     /////////////////////////////////////////////////
 
     private void Start()
     {
         // THE CODE BELOW IS NECESSARY FOR THE WAYPOINT SYSTEM
+        WaypointParent = GameObject.FindGameObjectWithTag("WaypointsParent");
         if (WaypointParent && waypointPrefab)
         {
             waypoint = Instantiate(waypointPrefab, WaypointParent.transform);
@@ -22,6 +23,7 @@ public class NPCInteractionHandler : MonoBehaviour
             Waypoint waypointScript = GetComponent<Waypoint>();
             if (waypointScript)
             {
+                Debug.Log("Setting waypoint UI");
                 waypointScript.SetWaypointUI(waypoint);
             }
         }
@@ -30,10 +32,6 @@ public class NPCInteractionHandler : MonoBehaviour
 
     public void Initialize(Quest quest)
     {
-        // THE CODE BELOW IS NECESSARY FOR THE WAYPOINT SYSTEM
-        if (waypoint)
-            waypoint.SetActive(true);
-        /////////////////////////////////////////////////////
         currentQuest = quest;
     }
 
@@ -80,14 +78,13 @@ public class NPCInteractionHandler : MonoBehaviour
         Debug.Log($"You talked to {npcName}!");
         currentQuest.AdvanceStep();
         // THE CODE BELOW IS NECESSARY FOR THE WAYPOINT SYSTEM
-        if (waypoint)
-            waypoint.SetActive(false);
+        Waypoint waypointScript = GetComponent<Waypoint>();
+        if (waypointScript)
+        {
+            Debug.Log("Destroying waypoint");
+            waypointScript.DestroyWaypoint();
+        }
         /////////////////////////////////////////////////////
         HideInteractionPrompt();
-    }
-
-    public GameObject GetWaypoint()
-    {
-        return waypoint;
     }
 }

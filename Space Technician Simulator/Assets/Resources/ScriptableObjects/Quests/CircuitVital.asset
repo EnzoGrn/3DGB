@@ -19,7 +19,7 @@ MonoBehaviour:
     have it repaired by a technician, and reinstall it in the engine room to restore
     power.'
   startDialogue: {fileID: 11400000, guid: 6384216fd2fa81b4fb1c81e08746a820, type: 2}
-  endDialogue: {fileID: 0}
+  endDialogue: {fileID: 11400000, guid: f7f17b884353f8d4ebeb1149e964698c, type: 2}
   questSteps:
   - title: Commander's call
     completionDialogue: {fileID: 11400000, guid: 319c636c01cf9a64ea35fe362f437108,
@@ -34,3 +34,7 @@ MonoBehaviour:
       type: 2}
     prefab: {fileID: 8507689175550021813, guid: 1f9217f9ce5425f40bf35a801212f0be,
       type: 3}
+  - title: Go to the machine room
+    completionDialogue: {fileID: 11400000, guid: 1333591c1ded0a34ab6ecdf99e76e95d,
+      type: 2}
+    prefab: {fileID: 340691150832798989, guid: 5b8bdfa344245714aa176679060d11d8, type: 3}

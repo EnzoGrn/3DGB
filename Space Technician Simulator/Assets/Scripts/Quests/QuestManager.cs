@@ -13,7 +13,7 @@ public class QuestManager : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.LogError("QuestManager désactivé, stack trace : " + System.Environment.StackTrace);
+        //Debug.LogError("QuestManager désactivé, stack trace : " + System.Environment.StackTrace);
     }
 
     private void Awake()

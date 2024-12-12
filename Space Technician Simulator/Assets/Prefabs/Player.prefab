@@ -443,7 +443,9 @@ MonoBehaviour:
   _LayerMaskInteract:
     serializedVersion: 2
     m_Bits: 64
-  _ExcludeLayerName: 
+  _PlayerCamera: {fileID: 0}
+  _InteractebleTag: InteractiveObject
+  KeyHintHUD: {fileID: 0}
 --- !u!1 &491569485310878367
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +481,7 @@ Transform:
   m_GameObject: {fileID: 491569485310878367}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.210217, y: 8.786317, z: -23.948788}
+  m_LocalPosition: {x: -7, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1269,7 +1271,9 @@ MonoBehaviour:
   _LayerMaskInteract:
     serializedVersion: 2
     m_Bits: 64
-  _ExcludeLayerName: 
+  _PlayerCamera: {fileID: 0}
+  _InteractebleTag: InteractiveObject
+  KeyHintHUD: {fileID: 0}
 --- !u!1 &803437240690189430
 GameObject:
   m_ObjectHideFlags: 0

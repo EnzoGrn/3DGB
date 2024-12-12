@@ -87,7 +87,6 @@ public class NpcMovement : MonoBehaviour
             LookAtPlayer();
         }
 
-
         if (_Agent.remainingDistance < 0.1f && !_IsWaiting)
         {
             StartCoroutine(NextTarget());
@@ -192,7 +191,7 @@ public class NpcMovement : MonoBehaviour
         {
             // Reset animation
             _Animator.SetBool(_AnimIDTriggerIdleAnimation, true);
-            Debug.Log("Start Idle Animation");
+            //Debug.Log("Start Idle Animation");
         }
         else
         {
@@ -206,7 +205,7 @@ public class NpcMovement : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("End Idle Animation");
+        //Debug.Log("End Idle Animation");
 
         _Agent.SetDestination(_Target[_CurrentTarget].position);
         _IsWaiting = false;

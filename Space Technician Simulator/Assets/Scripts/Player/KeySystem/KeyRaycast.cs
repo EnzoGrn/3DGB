@@ -1,50 +1,96 @@
 using UnityEngine;
 
-namespace KeySystem {
-    public class KeyRaycast : MonoBehaviour {
+namespace KeySystem
+{
+    public class KeyRaycast : MonoBehaviour
+    {
 
         [Header("Raycast Settings")]
         [SerializeField]
-        private int _RayDistance = 5;
+        private float _RayDistance = 5f;
 
         [SerializeField]
         private LayerMask _LayerMaskInteract;
 
         [SerializeField]
-        private string _ExcludeLayerName = null;
+        private Transform _PlayerCamera;
 
-        private KeyItemController _KeyRaycastObject;
-        private FuseController    _FuseRaycastObject;
-
+        [SerializeField]
         private string _InteractebleTag = "InteractiveObject";
 
         public GameObject KeyHintHUD;
 
-        private void Start () {
+        private KeyItemController _KeyRaycastObject;
+        private FuseController _FuseRaycastObject;
+
+        private void Start()
+        {
             Debug.Log("I'm in " + this.gameObject.name);
-            KeyHintHUD.SetActive(false);
+            if (KeyHintHUD != null)
+                KeyHintHUD.SetActive(false);
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                _PlayerCamera = player.GetComponentInChildren<Camera>().transform;
+                if (player.TryGetComponent<ChangeView>(out var changeView))
+                {
+                    changeView.OnCameraChanged += SetCamera;
+                }
+            }
+        }
+
+        private void SetCamera()
+        {
+            Debug.Log("SetCamera");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            _PlayerCamera = player.GetComponentInChildren<Camera>().transform;
         }
 
         private void Update()
         {
-            RaycastHit hit;
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            if (_PlayerCamera == null)
+            {
+                Debug.LogWarning("Player Camera is not assigned.");
+                return;
+            }
 
-            int mask = 1 << LayerMask.NameToLayer(_ExcludeLayerName) | _LayerMaskInteract.value;
+            Ray ray = new Ray(_PlayerCamera.position, _PlayerCamera.forward);
 
-            if (Physics.Raycast(transform.position, forward, out hit, _RayDistance, mask)) {
-                if (hit.collider.CompareTag(_InteractebleTag)) {
-                    KeyHintHUD.SetActive(true);
-                    _KeyRaycastObject  = hit.collider.GetComponent<KeyItemController>();
-                    _FuseRaycastObject = hit.collider.GetComponent<FuseController>();
+            //Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _RayDistance, Color.green);
 
-                    if (Input.GetKeyDown(KeyCode.E) && _KeyRaycastObject) // TODO: Change to InputManager
-                        _KeyRaycastObject.ObjectInteraction();
-                    if (Input.GetKeyDown(KeyCode.E) && _FuseRaycastObject) // TODO: Change to InputManager
-                        _FuseRaycastObject.ObjectInteraction();
+            if (Physics.Raycast(ray, out RaycastHit hit, _RayDistance, _LayerMaskInteract))
+            {
+                Debug.Log("Hit: " + hit.transform.gameObject.name);
+
+                Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _RayDistance, Color.red);
+
+                if (hit.transform.CompareTag(_InteractebleTag))
+                {
+                    if (KeyHintHUD != null)
+                        KeyHintHUD.SetActive(true);
+
+                    _KeyRaycastObject = hit.transform.GetComponent<KeyItemController>();
+                    _FuseRaycastObject = hit.transform.GetComponent<FuseController>();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    { // TODO: Change to InputManager
+                        if (_KeyRaycastObject != null)
+                            _KeyRaycastObject.ObjectInteraction();
+
+                        if (_FuseRaycastObject != null)
+                            _FuseRaycastObject.ObjectInteraction();
+                    }
                 }
-            } else {
-                KeyHintHUD.SetActive(false);
+                else if (KeyHintHUD != null)
+                {
+                    KeyHintHUD.SetActive(false);
+                }
+            }
+            else
+            {
+                if (KeyHintHUD != null)
+                    KeyHintHUD.SetActive(false);
+
                 _KeyRaycastObject = null;
                 _FuseRaycastObject = null;
             }
@@ -52,9 +98,12 @@ namespace KeySystem {
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Vector3 direction = transform.TransformDirection(Vector3.forward) * _RayDistance;
-            Gizmos.DrawRay(transform.position, direction);
+            if (_PlayerCamera != null)
+            {
+                Gizmos.color = Color.red;
+                Vector3 direction = _PlayerCamera.forward * _RayDistance;
+                Gizmos.DrawRay(_PlayerCamera.position, direction);
+            }
         }
     }
 }

@@ -40,11 +40,11 @@ namespace KeySystem {
             }
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.red;
-        //    Vector3 direction = transform.TransformDirection(Vector3.forward) * _RayDistance;
-        //    Gizmos.DrawRay(transform.position, direction);
-        //}
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Vector3 direction = transform.TransformDirection(Vector3.forward) * _RayDistance;
+            Gizmos.DrawRay(transform.position, direction);
+        }
     }
 }

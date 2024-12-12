@@ -309,46 +309,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2309913766018084272, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -22.010216
-      objectReference: {fileID: 0}
-    - target: {fileID: 2309913766018084272, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 10.161317
-      objectReference: {fileID: 0}
-    - target: {fileID: 2309913766018084272, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -27.948788
-      objectReference: {fileID: 0}
-    - target: {fileID: 3910455155434559529, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: _RayDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4969845875555931655, guid: 4ac72ce9d956e31499dd48cabac16ff2,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7639352019504543191, guid: 4ac72ce9d956e31499dd48cabac16ff2,
         type: 3}
       propertyPath: m_LocalPosition.x

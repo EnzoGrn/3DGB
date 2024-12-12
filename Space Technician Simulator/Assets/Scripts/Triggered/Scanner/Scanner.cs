@@ -30,6 +30,9 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private AudioClip _ScannerSound;
 
+    [SerializeField]
+    private LayerMask _excludeLayer;
+
     public void OnTriggerEnter(Collider other)
     {
         // If the player is around, trigger the event
@@ -73,7 +76,10 @@ public class Scanner : MonoBehaviour {
             // Check if the player is looking at the scanner
             Ray ray = new(_PlayerCamera.position, _PlayerCamera.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
+            int layerMask = 1 << _excludeLayer;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance, layerMask))
+            {
                 Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
 
                 if (hit.transform.gameObject.CompareTag("Scanner")) {

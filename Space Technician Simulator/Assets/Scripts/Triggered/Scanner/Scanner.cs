@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Player.Controller;
 
 public class Scanner : MonoBehaviour {
 
@@ -35,8 +36,20 @@ public class Scanner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = true;
             _PlayerCamera   = other.GetComponentInChildren<Camera>().transform;
+            ChangeView changeView = other.GetComponent<ChangeView>();
+            if (changeView != null)
+            {
+                changeView.OnCameraChanged += SetCamera;
+            }
             Debug.Log("Player is nearby");
         }
+    }
+
+    private void SetCamera()
+    {
+        Debug.Log("SetCamera");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _PlayerCamera = player.GetComponentInChildren<Camera>().transform;
     }
 
     public void OnTriggerExit(Collider other)
@@ -45,7 +58,12 @@ public class Scanner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = false;
             _PlayerCamera   = null;
+            if (other.TryGetComponent<ChangeView>(out var changeView))
+            {
+                changeView.OnCameraChanged -= SetCamera;
+            }
         }
+        _OnEventText.gameObject.SetActive(false);
     }
 
     public void Update()

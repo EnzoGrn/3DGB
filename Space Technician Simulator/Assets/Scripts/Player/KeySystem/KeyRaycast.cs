@@ -19,6 +19,10 @@ namespace KeySystem {
 
         private string _InteractebleTag = "InteractiveObject";
 
+        private void Start () {
+            Debug.Log("I'm in " + this.gameObject.name);
+        }
+
         private void Update()
         {
             RaycastHit hit;
@@ -35,5 +39,12 @@ namespace KeySystem {
                 }
             }
         }
+
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.red;
+        //    Vector3 direction = transform.TransformDirection(Vector3.forward) * _RayDistance;
+        //    Gizmos.DrawRay(transform.position, direction);
+        //}
     }
 }

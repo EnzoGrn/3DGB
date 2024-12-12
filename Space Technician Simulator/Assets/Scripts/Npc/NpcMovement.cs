@@ -69,9 +69,15 @@ public class NpcMovement : MonoBehaviour
     {
         _HasAnimator = TryGetComponent(out _Animator);
         _Agent = GetComponent<NavMeshAgent>();
-        _Agent.SetDestination(_Target[_CurrentTarget].position);
-
         AssignAnimationIDs();
+
+        // Check if there are some targets before Setting a destination
+
+        if (_Target.GetLength(0) <= 0)
+        {
+            return;
+        }
+        _Agent.SetDestination(_Target[_CurrentTarget].position);
     }
 
     private void Update()
@@ -87,8 +93,7 @@ public class NpcMovement : MonoBehaviour
             LookAtPlayer();
         }
 
-
-        if (_Agent.remainingDistance < 0.1f && !_IsWaiting)
+        if (_Agent.remainingDistance < 0.1f && !_IsWaiting && _Target.GetLength(0) > 0)
         {
             StartCoroutine(NextTarget());
         }

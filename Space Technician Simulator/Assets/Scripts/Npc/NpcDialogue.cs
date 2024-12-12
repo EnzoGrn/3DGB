@@ -11,6 +11,7 @@ public class NpcDialogue : MonoBehaviour
     [SerializeField] private DialogueSO _DialogueSO; // The dialogues of a player to display
     [SerializeField] private NpcMovement _NpcMovement;
     [SerializeField] private TMP_Text _StartDialogueText;
+    [SerializeField] private bool _CanLookPlayer;
 
     private bool _IsPlayerDetected = false;
     private bool _IsDialogueActive = false;
@@ -144,18 +145,21 @@ public class NpcDialogue : MonoBehaviour
         {
             _IsPlayerDetected = true;
 
+            Debug.Log("OnTriggerEnter PLayer is detected");
+            Debug.Log("OnTriggerEnter -> " + _IsDialogueActive);
+            Debug.Log("OnTriggerEnter -> " + _DialogueSO.DialogueType);
             if (!_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
             {
                 _IsDialogueActive = true;
                 DialogueManager.Instance.StartDialogue(_DialogueSO);
-                Debug.Log("Player entered auto dialogue");
+                Debug.Log("OnTriggerEnter Player entered auto dialogue");
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue && _CanLookPlayer)
         {
             _NpcMovement.LookAtPlayer();
         }

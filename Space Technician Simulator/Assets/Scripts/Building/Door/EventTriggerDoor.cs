@@ -33,7 +33,7 @@ public class EventTriggerDoor : MonoBehaviour {
             return;
         _IsOpen = open;
 
-        if (open) {
+        if (open && !_Animator.GetCurrentAnimatorStateInfo(0).IsName("Open")) {
             _Animator.SetTrigger("Open");
 
             if (AudioManager.Instance != null)

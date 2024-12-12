@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Events;
 
 public class QuestUIManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class QuestUIManager : MonoBehaviour
     [SerializeField] private GameObject questHUD;
     [SerializeField] private GameObject _DialogueBox;
     [SerializeField] private GameObject _NarratorPortrait;
+
+    [Header("Custom parameters")]
+
+    public UnityEvent OnDialogueEnded;
 
     private void OnDisable()
     {
@@ -33,7 +38,8 @@ public class QuestUIManager : MonoBehaviour
         DialogueManager.Instance.StartDialogue(dialogues);
 
         _NarratorPortrait.SetActive(true);
-        DialogueManager.Instance.OnDialogueEnded += HideNarrator;
+
+        DialogueManager.Instance.OnDialogueEnded += OnDialogueEnd;
     }
 
     private void UpdateQuestList(Quest quest)
@@ -104,7 +110,8 @@ public class QuestUIManager : MonoBehaviour
             questHUD.SetActive(true);
         }
 
-        StartDialogue(quest.QuestInfo.endDialogue);
+        if (quest.QuestInfo.endDialogue)
+            StartDialogue(quest.QuestInfo.endDialogue);
 
         Debug.Log(_quests.Count + " quests in list after removal");
         Debug.Log("Quest removed");
@@ -119,5 +126,16 @@ public class QuestUIManager : MonoBehaviour
     private void HideNarrator()
     {
         _NarratorPortrait.SetActive(false);
+    }
+
+    private void OnDialogueEnd()
+    {
+        HideNarrator();
+        CallCustomEvent();
+    }
+
+    private void CallCustomEvent()
+    {
+        OnDialogueEnded.Invoke();
     }
 }

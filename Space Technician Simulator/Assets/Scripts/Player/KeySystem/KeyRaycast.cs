@@ -15,7 +15,8 @@ namespace KeySystem {
         [SerializeField]
         private string _ExcludeLayerName = null;
 
-        private KeyItemController _RaycastObject;
+        private KeyItemController _KeyRaycastObject;
+        private FuseController    _FuseRaycastObject;
 
         private string _InteractebleTag = "InteractiveObject";
 
@@ -28,11 +29,17 @@ namespace KeySystem {
 
             if (Physics.Raycast(transform.position, forward, out hit, _RayDistance, mask)) {
                 if (hit.collider.CompareTag(_InteractebleTag)) {
-                    _RaycastObject = hit.collider.GetComponent<KeyItemController>();
+                    _KeyRaycastObject  = hit.collider.GetComponent<KeyItemController>();
+                    _FuseRaycastObject = hit.collider.GetComponent<FuseController>();
 
-                    if (Input.GetKeyDown(KeyCode.E)) // TODO: Change to InputManager
-                        _RaycastObject.ObjectInteraction();
+                    if (Input.GetKeyDown(KeyCode.E) && _KeyRaycastObject) // TODO: Change to InputManager
+                        _KeyRaycastObject.ObjectInteraction();
+                    if (Input.GetKeyDown(KeyCode.E) && _FuseRaycastObject) // TODO: Change to InputManager
+                        _FuseRaycastObject.ObjectInteraction();
                 }
+            } else {
+                _KeyRaycastObject = null;
+                _FuseRaycastObject = null;
             }
         }
     }

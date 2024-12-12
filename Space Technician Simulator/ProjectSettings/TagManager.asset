@@ -8,6 +8,7 @@ TagManager:
   - InteractiveObject
   - CinemachineTarget
   - ManualDialogue
+  - Chest
   - WaypointsParent
   layers:
   - Default

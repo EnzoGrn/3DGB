@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NpcDialogue : MonoBehaviour
 {
@@ -13,6 +15,16 @@ public class NpcDialogue : MonoBehaviour
     private bool _IsPlayerDetected = false;
     private bool _IsDialogueActive = false;
     private SphereCollider _SphereCollider;
+
+    [Header("Events")]
+
+    [SerializeField]
+    private bool _DynamicDialogue = false;
+
+    [SerializeField]
+    private DialogueSO _DefaultDialogue; // Dialogue to put only on dynamic one.
+
+    public Func<DialogueSO> OnNewDialogue;
 
     private void Awake()
     {
@@ -65,6 +77,7 @@ public class NpcDialogue : MonoBehaviour
     private void OnDialogueEnd()
     {
         Debug.Log("Dialogue Ended Event");
+        
         _IsDialogueActive = false;
 
         if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
@@ -98,6 +111,17 @@ public class NpcDialogue : MonoBehaviour
         Debug.Log("Dialogue Started");
 
         _IsDialogueActive = true;
+
+        if (_DynamicDialogue) {
+            DialogueSO newDialog = OnNewDialogue?.Invoke();
+
+            if (newDialog)
+                _DialogueSO = newDialog;
+            else
+                _DialogueSO = _DefaultDialogue;
+        }
+
+        if (!_DialogueSO) return;
 
         if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
         {

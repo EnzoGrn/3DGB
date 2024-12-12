@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueSO dialogues)
     {
-        if (_IsDialogueActive) return;
+        if (!dialogues || _IsDialogueActive) return;
 
         Debug.Log("Dialogue Started + " + dialogues.Messages.Length);
 

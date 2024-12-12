@@ -21,6 +21,9 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private float _ScannerDistance = 3f;
 
+    [SerializeField]
+    private bool _OneScanPossible = false;
+
     [Header("Events Display")]
     [SerializeField]
     private TMPro.TextMeshPro _OnEventText;
@@ -29,13 +32,16 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private AudioClip _ScannerSound;
 
+    [Header("Tag needed for interact")]
+    [SerializeField]
+    private string _TagNeeded = "Scanner";
+
     public void OnTriggerEnter(Collider other)
     {
         // If the player is around, trigger the event
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = true;
             _PlayerCamera   = other.GetComponentInChildren<Camera>().transform;
-            Debug.Log("Player is nearby");
         }
     }
 
@@ -55,10 +61,13 @@ public class Scanner : MonoBehaviour {
             // Check if the player is looking at the scanner
             Ray ray = new(_PlayerCamera.position, _PlayerCamera.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
+            if (_OneScanPossible && _IsScanned) {
+                if (_OnEventText)
+                    _OnEventText.gameObject.SetActive(false);
+            } else if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
                 Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
 
-                if (hit.transform.gameObject.CompareTag("Scanner")) {
+                if (hit.transform.gameObject.CompareTag(_TagNeeded)) {
 
                     if (_OnEventText)
                         _OnEventText.gameObject.SetActive(true);

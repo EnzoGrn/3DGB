@@ -340,9 +340,13 @@ MonoBehaviour:
   _Fuse: {fileID: 0}
   FusePickedUp: 0
   _HasFuseDialog: {fileID: 11400000, guid: 1ad702b6239985a46bc4aa59f24c70f7, type: 2}
+  _AlreadyRepearFuse:
+  - {fileID: 11400000, guid: b0d8f483be1aeb94baf3dd139865ad11, type: 2}
+  - {fileID: 11400000, guid: 3e7aae5887bb12245b02b371b1c67b65, type: 2}
   _NoFuseDialog:
   - {fileID: 11400000, guid: 6d4ea240eddf7a044aff8acc9b7c962f, type: 2}
   - {fileID: 11400000, guid: 17f8dd5ee3b6ce2438cdbbeb116da068, type: 2}
+  _CanInteract: 0
   WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
     type: 3}
   _WaypointParent: {fileID: 0}

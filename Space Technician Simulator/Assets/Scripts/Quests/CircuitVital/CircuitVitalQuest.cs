@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class CircuitVitalQuest : MonoBehaviour {
+public class CircuitVitalQuest : MonoBehaviour
+{
 
     [Header("Circuit Vital Quest")]
 
@@ -36,7 +38,18 @@ public class CircuitVitalQuest : MonoBehaviour {
     private DialogueSO _HasFuseDialog;
 
     [SerializeField]
+    private DialogueSO[] _AlreadyRepearFuse;
+
+    [SerializeField]
     private DialogueSO[] _NoFuseDialog;
+
+    [Header("Step #5")]
+
+    [SerializeField]
+    private bool _CanInteract = false;
+
+    [SerializeField]
+    private GameObject _InteractTxt;
 
     public GameObject WaypointPrefab;
 
@@ -55,7 +68,7 @@ public class CircuitVitalQuest : MonoBehaviour {
     /// </summary
     public void Initialize(Quest quest)
     {
-        _Quest          = quest;
+        _Quest = quest;
         _QuestManagerUI = Object.FindFirstObjectByType<QuestUIManager>();
 
         if (_QuestManagerUI) {
@@ -96,6 +109,18 @@ public class CircuitVitalQuest : MonoBehaviour {
 
             // -- Script of the fourth step (step 3) --
             if (CircuitNumber == 4) {
+                _WaypointScript = GetComponent<Waypoint>();
+
+                _WaypointParent = GameObject.FindGameObjectWithTag("WaypointsParent");
+
+                if (_WaypointParent && WaypointPrefab)
+                    _Waypoint = Instantiate(WaypointPrefab, _WaypointParent.transform);
+                _WaypointScript.SetWaypointUI(_Waypoint);
+                _WaypointScript.isDisabled = true;
+            }
+
+            // -- Script of the fifth step (step 4) --
+            if (CircuitNumber == 5) {
                 _WaypointScript = GetComponent<Waypoint>();
 
                 _WaypointParent = GameObject.FindGameObjectWithTag("WaypointsParent");
@@ -168,9 +193,26 @@ public class CircuitVitalQuest : MonoBehaviour {
             _WaypointScript.isDisabled = true;
         }
 
-        // If the quest is completed, destroy the quest and everything related to it
-        if (_Quest.CurrentStepIndex == _Quest.QuestInfo.questSteps.Count) {
+        // -- Step 5, waypoint --
+        if (CircuitNumber == 5 && _Quest.CurrentStepIndex == 4 && _WaypointScript) {
+            _WaypointScript.isDisabled = false;
+        } else if (CircuitNumber == 5 && _WaypointScript) {
+            _WaypointScript.isDisabled = true;
+        }
 
+        // If the quest is completed, destroy the quest and everything related to it
+        if (_Quest.CurrentStepIndex == _Quest.QuestInfo.questSteps.Count) {}
+    }
+
+    private void Update()
+    {
+        // -- Show text to interact --
+        if (_CanInteract && CircuitNumber == 5) {
+            if (Input.GetKeyDown(KeyCode.E)) {
+                _Quest.AdvanceStep();
+
+                CanInteract(false);
+            }
         }
     }
 
@@ -182,6 +224,8 @@ public class CircuitVitalQuest : MonoBehaviour {
             _WaypointScript.isDisabled = false;
             _WaypointScript.DestroyWaypoint();
 
+            if (_Quest.CurrentStepIndex > 2)
+                return _AlreadyRepearFuse[Random.Range(0, _AlreadyRepearFuse.Length)];
             return _HasFuseDialog;
         } else {
             return _NoFuseDialog[Random.Range(0, _NoFuseDialog.Length)];
@@ -200,6 +244,26 @@ public class CircuitVitalQuest : MonoBehaviour {
         if (CircuitNumber == 4 && _Quest.CurrentStepIndex == 3) {
             if (other.CompareTag("Player"))
                 _Quest.AdvanceStep();
+        } else if (CircuitNumber == 5 && _Quest.CurrentStepIndex == 4) {
+            if (other.CompareTag("Player"))
+                CanInteract(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && _InteractTxt)
+            CanInteract(false);
+    }
+
+    private void CanInteract(bool canInteract)
+    {
+        _CanInteract = canInteract;
+
+        if (_CanInteract) {
+            _InteractTxt.SetActive(true);
+        } else {
+            _InteractTxt.SetActive(false);
         }
     }
 }

@@ -38,3 +38,8 @@ MonoBehaviour:
     completionDialogue: {fileID: 11400000, guid: 1333591c1ded0a34ab6ecdf99e76e95d,
       type: 2}
     prefab: {fileID: 340691150832798989, guid: 5b8bdfa344245714aa176679060d11d8, type: 3}
+  - title: Repare the generator
+    completionDialogue: {fileID: 11400000, guid: 155b663a4e788874599625aac7864533,
+      type: 2}
+    prefab: {fileID: 5256610929038129126, guid: bead7a59b4720944db34086bfd69e8be,
+      type: 3}

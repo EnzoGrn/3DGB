@@ -32,16 +32,7 @@ namespace Synty.Interface.SciFiSoldierHUD.Samples
 
         [Header("Parameters")]
         public bool showCursor;
-        [SerializeField] private SceneAsset sceneAsset;
-        [SerializeField, HideInInspector] private string sceneName;
-
-        private void OnValidate()
-        {
-            if (sceneAsset != null)
-            {
-                sceneName = sceneAsset.name;
-            }
-        }
+        [SerializeField] private string sceneName;
 
         private void OnEnable()
         {

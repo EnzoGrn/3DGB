@@ -15,16 +15,7 @@ public class SceneReference
 public class LoadingManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text progressText;
-    [SerializeField] private SceneAsset sceneAsset;
-    [SerializeField, HideInInspector] private string sceneName;
-
-    private void OnValidate()
-    {
-        if (sceneAsset != null)
-        {
-            sceneName = sceneAsset.name;
-        }
-    }
+    [SerializeField] private string sceneName;
 
     private void Start()
     {
@@ -48,7 +39,6 @@ public class LoadingManager : MonoBehaviour
 
             if (operation.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(1f);
                 progressText.text = "Press any key to continue...";
                 if (Input.anyKeyDown)
                 {

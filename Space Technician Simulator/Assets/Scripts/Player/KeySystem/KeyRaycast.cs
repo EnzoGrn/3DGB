@@ -20,6 +20,13 @@ namespace KeySystem {
 
         private string _InteractebleTag = "InteractiveObject";
 
+        public GameObject KeyHintHUD;
+
+        private void Start () {
+            Debug.Log("I'm in " + this.gameObject.name);
+            KeyHintHUD.SetActive(false);
+        }
+
         private void Update()
         {
             RaycastHit hit;
@@ -29,6 +36,7 @@ namespace KeySystem {
 
             if (Physics.Raycast(transform.position, forward, out hit, _RayDistance, mask)) {
                 if (hit.collider.CompareTag(_InteractebleTag)) {
+                    KeyHintHUD.SetActive(true);
                     _KeyRaycastObject  = hit.collider.GetComponent<KeyItemController>();
                     _FuseRaycastObject = hit.collider.GetComponent<FuseController>();
 
@@ -38,9 +46,17 @@ namespace KeySystem {
                         _FuseRaycastObject.ObjectInteraction();
                 }
             } else {
+                KeyHintHUD.SetActive(false);
                 _KeyRaycastObject = null;
                 _FuseRaycastObject = null;
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Vector3 direction = transform.TransformDirection(Vector3.forward) * _RayDistance;
+            Gizmos.DrawRay(transform.position, direction);
         }
     }
 }

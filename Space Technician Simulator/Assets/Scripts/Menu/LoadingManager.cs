@@ -46,6 +46,7 @@ public class LoadingManager : MonoBehaviour
 
             if (operation.progress >= 0.9f)
             {
+                yield return new WaitForSeconds(1f);
                 progressText.text = "Press any key to continue...";
                 if (Input.anyKeyDown)
                 {

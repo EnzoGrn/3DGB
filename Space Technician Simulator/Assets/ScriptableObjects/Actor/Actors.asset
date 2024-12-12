@@ -19,3 +19,9 @@ MonoBehaviour:
     actorName: Alfredo
   - actorId: 2
     actorName: Sarah
+  - actorId: 3
+    actorName: Lt. Stevens
+  - actorId: 4
+    actorName: Captain Orlan
+  - actorId: 5
+    actorName: Mark

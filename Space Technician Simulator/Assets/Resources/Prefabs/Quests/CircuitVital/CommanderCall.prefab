@@ -44,12 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08262c2a621f97e4999f7feeaa6b2aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
-    type: 3}
-  _WaypointParent: {fileID: 0}
-  _Waypoint: {fileID: 0}
+  CircuitNumber: 1
   _QuestManagerUI: {fileID: 0}
   _Fuse: {fileID: 0}
   FusePickedUp: 0
   _HasFuseDialog: {fileID: 0}
   _NoFuseDialog: []
+  WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
+    type: 3}
+  _WaypointParent: {fileID: 0}
+  _Waypoint: {fileID: 0}

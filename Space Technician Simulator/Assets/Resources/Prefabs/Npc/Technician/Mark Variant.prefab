@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08262c2a621f97e4999f7feeaa6b2aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CircuitNumber: 3
   _QuestManagerUI: {fileID: 0}
   _Fuse: {fileID: 0}
   FusePickedUp: 0

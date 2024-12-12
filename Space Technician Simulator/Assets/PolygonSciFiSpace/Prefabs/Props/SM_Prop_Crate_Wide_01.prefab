@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4676896302261968}
   - component: {fileID: 33843773847140766}
   - component: {fileID: 23633573811509438}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SM_Prop_Crate_Wide_Lid_01
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4760832903706533}
   - component: {fileID: 5653943630334057977}
   - component: {fileID: 2701288134628286058}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SM_Prop_Crate_Wide_01
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -265,10 +265,13 @@ MonoBehaviour:
   _IsScanned: 0
   _IsPlayerNearby: 0
   _PlayerCamera: {fileID: 0}
-  _ScannerDistance: 3
+  _ScannerDistance: 7
   _OneScanPossible: 1
   _OnEventText: {fileID: 3163179385590670261}
   _ScannerSound: {fileID: 0}
+  _excludeLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _TagNeeded: Chest
 --- !u!65 &2701288134628286058
 BoxCollider:

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Player.Controller;
 
 public class Scanner : MonoBehaviour {
 
@@ -32,6 +33,8 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private AudioClip _ScannerSound;
 
+    [SerializeField]
+    private LayerMask _excludeLayer;
     [Header("Tag needed for interact")]
     [SerializeField]
     private string _TagNeeded = "Scanner";
@@ -42,7 +45,20 @@ public class Scanner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = true;
             _PlayerCamera   = other.GetComponentInChildren<Camera>().transform;
+            ChangeView changeView = other.GetComponent<ChangeView>();
+            if (changeView != null)
+            {
+                changeView.OnCameraChanged += SetCamera;
+            }
+            Debug.Log("Player is nearby");
         }
+    }
+
+    private void SetCamera()
+    {
+        Debug.Log("SetCamera");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _PlayerCamera = player.GetComponentInChildren<Camera>().transform;
     }
 
     public void OnTriggerExit(Collider other)
@@ -51,7 +67,12 @@ public class Scanner : MonoBehaviour {
         if (other.CompareTag("Player")) {
             _IsPlayerNearby = false;
             _PlayerCamera   = null;
+            if (other.TryGetComponent<ChangeView>(out var changeView))
+            {
+                changeView.OnCameraChanged -= SetCamera;
+            }
         }
+        _OnEventText.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -61,10 +82,12 @@ public class Scanner : MonoBehaviour {
             // Check if the player is looking at the scanner
             Ray ray = new(_PlayerCamera.position, _PlayerCamera.forward);
 
+            int layerMask = 1 << _excludeLayer;
+
             if (_OneScanPossible && _IsScanned) {
                 if (_OnEventText)
                     _OnEventText.gameObject.SetActive(false);
-            } else if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance)) {
+            } else if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance, layerMask)) {
                 Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
 
                 if (hit.transform.gameObject.CompareTag(_TagNeeded)) {

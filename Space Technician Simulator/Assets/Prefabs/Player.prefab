@@ -1126,7 +1126,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.972549, g: 0.95686275, b: 0.92941177, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fe9ac0edf4483448432006ad75c0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RayDistance: 6
+  _RayDistance: 10
   _LayerMaskInteract:
     serializedVersion: 2
     m_Bits: 64
@@ -4369,7 +4369,7 @@ GameObject:
   - component: {fileID: 8429222394022802969}
   - component: {fileID: 1886874539596405106}
   - component: {fileID: 8791773769993783094}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DialogueTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

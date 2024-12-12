@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2442037598880928684}
-  - component: {fileID: 10523281324134250}
   - component: {fileID: 7065181727069176263}
+  - component: {fileID: 1339817593345992362}
+  - component: {fileID: 8644896438415633684}
   m_Layer: 0
   m_Name: Scanner
   m_TagString: Scanner
@@ -34,27 +35,6 @@ Transform:
   - {fileID: 266619055971012304}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &10523281324134250
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877815021041667911}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1076705, y: 2, z: 1.5390005}
-  m_Center: {x: -0.08390963, y: 0, z: -0.82219636}
 --- !u!114 &7065181727069176263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +59,55 @@ MonoBehaviour:
   _ScannerDistance: 3
   _OnEventText: {fileID: 0}
   _ScannerSound: {fileID: 8300000, guid: 5d88e458df060b84783b2e2fbfe92318, type: 3}
+  _excludeLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!136 &1339817593345992362
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877815021041667911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.65
+  m_Height: 1.5
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: -0.6}
+--- !u!136 &8644896438415633684
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877815021041667911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!1001 &262130373372234438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 1011923648085178, guid: c37ec2b7a5c4ed345b07d1a3d577e46e, type: 3}
       propertyPath: m_Name
       value: SM_Prop_HandScanner_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011923648085178, guid: c37ec2b7a5c4ed345b07d1a3d577e46e, type: 3}
+      propertyPath: m_TagString
+      value: Scanner
       objectReference: {fileID: 0}
     - target: {fileID: 4642902130148374, guid: c37ec2b7a5c4ed345b07d1a3d577e46e, type: 3}
       propertyPath: m_LocalPosition.x

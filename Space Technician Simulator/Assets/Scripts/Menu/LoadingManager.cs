@@ -1,8 +1,10 @@
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [System.Serializable]
 public class SceneReference

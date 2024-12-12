@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
-using Player.Controller;
 
 public class Scanner : MonoBehaviour {
 

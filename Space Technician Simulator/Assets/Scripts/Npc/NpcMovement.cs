@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Windows;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
 public class NpcMovement : MonoBehaviour
 {
     [SerializeField] public bool _CanMove = true;

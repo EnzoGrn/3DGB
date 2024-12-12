@@ -11,11 +11,17 @@ public class QuestManager : MonoBehaviour
     public event System.Action<Quest> OnQuestAdded;
     public event System.Action<Quest> OnQuestRemoved;
 
+    private void OnDisable()
+    {
+        Debug.LogError("QuestManager désactivé, stack trace : " + System.Environment.StackTrace);
+    }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,6 +33,7 @@ public class QuestManager : MonoBehaviour
     {
         if (questInfo == null)
             return;
+        Debug.Log("Starting quest: " + questInfo.displayName);
         Quest newQuest = new Quest(questInfo);
 
         foreach (QuestStep step in questInfo.questSteps) {

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class QuestUIManager : MonoBehaviour
 {
-    public string narratorName = "Lt. Stevens";
     [SerializeField] private TMP_Text _Dialogue;
     [SerializeField] private TMP_Text _Name;
     [SerializeField] private List<Quest> _quests = new List<Quest>();
@@ -16,21 +15,26 @@ public class QuestUIManager : MonoBehaviour
     [SerializeField] private GameObject _NarratorPortrait;
 
     [Header("Custom parameters")]
-
     public UnityEvent OnDialogueEnded;
 
     private void OnDisable()
     {
-        QuestManager.Instance.OnQuestAdded -= UpdateQuestList;
-        QuestManager.Instance.OnQuestRemoved -= RemoveQuest;
-        Debug.Log("QuestUIManager disabled");
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnQuestAdded -= UpdateQuestList;
+            QuestManager.Instance.OnQuestRemoved -= RemoveQuest;
+            Debug.Log("QuestUIManager disabled");
+        }
     }
 
     private void Start()
     {
-        QuestManager.Instance.OnQuestAdded += UpdateQuestList;
-        QuestManager.Instance.OnQuestRemoved += RemoveQuest;
-        Debug.Log("QuestUIManager started");
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnQuestAdded += UpdateQuestList;
+            QuestManager.Instance.OnQuestRemoved += RemoveQuest;
+            Debug.Log("QuestUIManager started");
+        }
     }
 
     public void StartDialogue(DialogueSO dialogues)

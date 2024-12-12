@@ -31,6 +31,7 @@ public class NpcMovement : MonoBehaviour
     private int _AnimIDJump;
     private int _AnimIDFreeFall;
     private int _AnimIDMotionSpeed;
+    private int _AnimIDTriggerIdleAnimation;
 
     // Audio
     public AudioClip LandingAudioClip;
@@ -135,6 +136,7 @@ public class NpcMovement : MonoBehaviour
         _AnimIDJump = Animator.StringToHash("Jump");
         _AnimIDFreeFall = Animator.StringToHash("FreeFall");
         _AnimIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        _AnimIDTriggerIdleAnimation = Animator.StringToHash("TriggerIdleAnimation");
     }
 
     private void PingPongNextTarget()
@@ -188,7 +190,26 @@ public class NpcMovement : MonoBehaviour
             PingPongNextTarget();
         }
 
-        yield return new WaitForSeconds(4f);
+        if (_HasAnimator)
+        {
+            // Reset animation
+            _Animator.SetBool(_AnimIDTriggerIdleAnimation, true);
+            Debug.Log("Start Idle Animation");
+        }
+        else
+        {
+            Debug.LogWarning("No Animator found on NPC");
+        }
+
+        // Wait for TriggerIdleAnimation to be fasle
+        while (_Animator.GetBool("TriggerIdleAnimation"))
+        {
+            HandleAnimation();
+            yield return null;
+        }
+
+        Debug.Log("End Idle Animation");
+
         _Agent.SetDestination(_Target[_CurrentTarget].position);
         _IsWaiting = false;
     }

@@ -16,6 +16,9 @@ public class CircuitVitalQuest : MonoBehaviour {
 
     [Header("Step #2")]
 
+    [SerializeField]
+    private FuseController _Fuse;
+
     public bool FusePickedUp = false;
 
     [Header("Step #3")]
@@ -25,6 +28,16 @@ public class CircuitVitalQuest : MonoBehaviour {
 
     [SerializeField]
     private DialogueSO[] _NoFuseDialog;
+
+    public GameObject WaypointPrefab;
+
+    [SerializeField]
+    private GameObject _WaypointParent;
+
+    [SerializeField]
+    private GameObject _Waypoint;
+
+    private Waypoint _WaypointScript;
 
     /// <summary>
     /// Initialize the quest
@@ -42,10 +55,12 @@ public class CircuitVitalQuest : MonoBehaviour {
             if (_CircuitVitalQuests.Length == 1) {
                 _QuestManagerUI.OnDialogueEnded.AddListener(InitializationDialogueEnded);
 
-                FuseController fuse = Object.FindAnyObjectByType<FuseController>();
+                _Fuse = Object.FindAnyObjectByType<FuseController>();
 
-                if (fuse)
-                    fuse.OnFusePickup.AddListener(OnFusePickup);
+                if (_Fuse) {
+                    _Fuse.InitWaypoint();
+                    _Fuse.OnFusePickup += OnFusePickup;
+                }
             } else if (_CircuitVitalQuests.Length == 2) {
                 NpcDialogue dialog = GetComponent<NpcDialogue>();
 
@@ -55,6 +70,15 @@ public class CircuitVitalQuest : MonoBehaviour {
                     return;
                 }
                 dialog.OnNewDialogue += () => GetDialogueMark();
+
+                _WaypointScript = GetComponent<Waypoint>();
+
+                _WaypointParent = GameObject.FindGameObjectWithTag("WaypointsParent");
+
+                if (_WaypointParent && WaypointPrefab)
+                    _Waypoint = Instantiate(WaypointPrefab, _WaypointParent.transform);
+                _WaypointScript.SetWaypointUI(_Waypoint);
+                _WaypointScript.isDisabled = true;
             }
         } else {
             Debug.LogError("QuestUIManager not found");
@@ -71,8 +95,11 @@ public class CircuitVitalQuest : MonoBehaviour {
     {
         _QuestManagerUI.OnDialogueEnded.RemoveListener(InitializationDialogueEnded);
 
-        if (_Quest.CurrentStepIndex == 0)
+        if (_Quest.CurrentStepIndex == 0) {
             _Quest.AdvanceStep();
+
+            _Fuse.Set();
+        }
     }
 
     /// <summary>
@@ -85,6 +112,11 @@ public class CircuitVitalQuest : MonoBehaviour {
 
         foreach (var quest in _CircuitVitalQuests)
             quest.FusePickedUp = true;
+        _Fuse.Delete();
+
+        Destroy(_Fuse.gameObject);
+
+        _Fuse = null;
     }
 
     private void FixedUpdate()
@@ -95,6 +127,12 @@ public class CircuitVitalQuest : MonoBehaviour {
 
             return;
         }
+        
+        if (_Quest.CurrentStepIndex == 2 && _WaypointScript) {
+            _WaypointScript.isDisabled = false;
+        } else if (_WaypointScript) {
+            _WaypointScript.isDisabled = true;
+        }
     }
 
     private DialogueSO GetDialogueMark()
@@ -102,6 +140,9 @@ public class CircuitVitalQuest : MonoBehaviour {
         if (FusePickedUp) {
             if (_Quest.CurrentStepIndex == 2)
                 DialogueManager.Instance.OnDialogueEnded += AfterTalkToMark;
+            _WaypointScript.isDisabled = false;
+            _WaypointScript.DestroyWaypoint();
+
             return _HasFuseDialog;
         } else {
             return _NoFuseDialog[Random.Range(0, _NoFuseDialog.Length)];

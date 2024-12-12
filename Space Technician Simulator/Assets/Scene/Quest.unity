@@ -1645,6 +1645,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5145554952947452686, guid: 7134d1b079bab07438cd9cae394f8ff4,
+        type: 3}
+      propertyPath: m_TagString
+      value: WaypointsParent
+      objectReference: {fileID: 0}
     - target: {fileID: 5961942868372880194, guid: 7134d1b079bab07438cd9cae394f8ff4,
         type: 3}
       propertyPath: m_AnchorMax.y

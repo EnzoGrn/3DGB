@@ -9,6 +9,7 @@ TagManager:
   - CinemachineTarget
   - ManualDialogue
   - Chest
+  - WaypointsParent
   layers:
   - Default
   - TransparentFX

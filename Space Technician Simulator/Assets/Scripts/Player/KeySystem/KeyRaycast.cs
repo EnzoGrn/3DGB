@@ -29,7 +29,7 @@ namespace KeySystem {
 
             if (Physics.Raycast(transform.position, forward, out hit, _RayDistance, mask)) {
                 if (hit.collider.CompareTag(_InteractebleTag)) {
-                    _KeyRaycastObject     = hit.collider.GetComponent<KeyItemController>();
+                    _KeyRaycastObject  = hit.collider.GetComponent<KeyItemController>();
                     _FuseRaycastObject = hit.collider.GetComponent<FuseController>();
 
                     if (Input.GetKeyDown(KeyCode.E) && _KeyRaycastObject) // TODO: Change to InputManager
@@ -37,6 +37,9 @@ namespace KeySystem {
                     if (Input.GetKeyDown(KeyCode.E) && _FuseRaycastObject) // TODO: Change to InputManager
                         _FuseRaycastObject.ObjectInteraction();
                 }
+            } else {
+                _KeyRaycastObject = null;
+                _FuseRaycastObject = null;
             }
         }
     }

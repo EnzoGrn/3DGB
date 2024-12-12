@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3132759863684614060}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.12, y: 0, z: -1.62}
+  m_LocalPosition: {x: -1.264, y: 0, z: -1.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 5332189435179448508}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.88, y: 0, z: 3.17}
+  m_LocalPosition: {x: 4.91, y: 0, z: -5.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 6299042282887594012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.29, y: 0, z: 5.09}
+  m_LocalPosition: {x: 2.29, y: 0, z: -2.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 6816944749833525648}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.22, y: 0, z: -0}
+  m_LocalPosition: {x: 0.09, y: 0, z: -0.976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,17 +170,17 @@ PrefabInstance:
     - target: {fileID: 794845078331670113, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -19.799925
       objectReference: {fileID: 0}
     - target: {fileID: 794845078331670113, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02925539
       objectReference: {fileID: 0}
     - target: {fileID: 794845078331670113, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.55
+      value: 0.79759794
       objectReference: {fileID: 0}
     - target: {fileID: 794845078331670113, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
@@ -245,7 +245,7 @@ PrefabInstance:
     - target: {fileID: 5151601846750909679, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
       propertyPath: _CanMove
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5151601846750909679, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
@@ -280,6 +280,12 @@ PrefabInstance:
     - target: {fileID: 6558470411373095538, guid: bbc74bc5fe4003f49a21ac918840d6d4,
         type: 3}
       propertyPath: _DialogueSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 52016147ec400ff40b1217f613a00b07,
+        type: 2}
+    - target: {fileID: 6558470411373095538, guid: bbc74bc5fe4003f49a21ac918840d6d4,
+        type: 3}
+      propertyPath: _DefaultDialogue
       value: 
       objectReference: {fileID: 11400000, guid: 52016147ec400ff40b1217f613a00b07,
         type: 2}
@@ -330,11 +336,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _QuestManagerUI: {fileID: 0}
+  _Fuse: {fileID: 0}
   FusePickedUp: 0
   _HasFuseDialog: {fileID: 11400000, guid: 1ad702b6239985a46bc4aa59f24c70f7, type: 2}
   _NoFuseDialog:
   - {fileID: 11400000, guid: 6d4ea240eddf7a044aff8acc9b7c962f, type: 2}
   - {fileID: 11400000, guid: 17f8dd5ee3b6ce2438cdbbeb116da068, type: 2}
+  WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
+    type: 3}
+  _WaypointParent: {fileID: 0}
+  _Waypoint: {fileID: 0}
 --- !u!114 &-4751790117194249679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,5 +359,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4279832223548504254}
-  offset: {x: 0, y: 0, z: 0}
-  isDisabled: 1
+  offset: {x: 0, y: 1.25, z: 0}
+  isDisabled: 0

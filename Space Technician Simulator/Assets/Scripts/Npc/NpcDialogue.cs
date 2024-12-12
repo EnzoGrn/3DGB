@@ -21,6 +21,9 @@ public class NpcDialogue : MonoBehaviour
     [SerializeField]
     private bool _DynamicDialogue = false;
 
+    [SerializeField]
+    private DialogueSO _DefaultDialogue; // Dialogue to put only on dynamic one.
+
     public Func<DialogueSO> OnNewDialogue;
 
     private void Awake()
@@ -114,6 +117,8 @@ public class NpcDialogue : MonoBehaviour
 
             if (newDialog)
                 _DialogueSO = newDialog;
+            else
+                _DialogueSO = _DefaultDialogue;
         }
 
         if (!_DialogueSO) return;

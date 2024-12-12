@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a895bc0ceb444cb4aa0740818b8b8ec2, type: 3}
+  m_Name: CircuitVital
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: CircuitVital
+  displayName: Circuit Vital
+  description: 'A power failure paralyses several vital sections of the space base.
+    The commander asks you to intervene urgently: retrieve a fuse from the storeroom,
+    have it repaired by a technician, and reinstall it in the engine room to restore
+    power.'
+  startDialogue: {fileID: 11400000, guid: 6384216fd2fa81b4fb1c81e08746a820, type: 2}
+  endDialogue: {fileID: 0}
+  questSteps:
+  - title: Commander's call
+    completionDialogue: {fileID: 11400000, guid: 319c636c01cf9a64ea35fe362f437108,
+      type: 2}
+    prefab: {fileID: 154721069771879651, guid: 970e771682503b34fbdacdd7c2a0ed64, type: 3}
+  - title: Find the fuse
+    completionDialogue: {fileID: 11400000, guid: df8f15b5af3581d4eb6deda22d2c47d3,
+      type: 2}
+    prefab: {fileID: 0}
+  - title: Find Mark at the workshop
+    completionDialogue: {fileID: 11400000, guid: ebeb9b44536d4d54dbb5ea3e274a33e9,
+      type: 2}
+    prefab: {fileID: 8507689175550021813, guid: 1f9217f9ce5425f40bf35a801212f0be,
+      type: 3}

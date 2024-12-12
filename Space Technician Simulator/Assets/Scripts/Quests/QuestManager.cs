@@ -26,20 +26,25 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(QuestInfoSO questInfo)
     {
-        if (questInfo == null) return;
+        if (questInfo == null)
+            return;
         Quest newQuest = new Quest(questInfo);
-        foreach (QuestStep step in questInfo.questSteps)
-        {
+
+        foreach (QuestStep step in questInfo.questSteps) {
+            if (step.prefab == null)
+                continue;
             GameObject stepInstance = Instantiate(step.prefab, step.prefab.transform.position, Quaternion.identity);
             NPCInteractionHandler nPCInteractionHandler = stepInstance.GetComponent<NPCInteractionHandler>();
+
             if (nPCInteractionHandler != null)
-            {
                 nPCInteractionHandler.Initialize(newQuest);
-            }
-            else
-            {
-                Debug.LogWarning($"No NPCInteractionHandler found on {step.prefab.name}");
-            }
+
+            // -- Circuit Vital Quest Step --
+            CircuitVitalQuest circuitVital = stepInstance.GetComponent<CircuitVitalQuest>();
+
+            if (circuitVital != null)
+                circuitVital.Initialize(newQuest);
+            // -------------------------------
         }
         newQuest.OnQuestCompleted += HandleQuestCompleted;
         activeQuests.Add(newQuest);

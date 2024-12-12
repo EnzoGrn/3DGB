@@ -22,6 +22,9 @@ public class Scanner : MonoBehaviour {
     [SerializeField]
     private float _ScannerDistance = 3f;
 
+    [SerializeField]
+    private bool _OneScanPossible = false;
+
     [Header("Events Display")]
     [SerializeField]
     private TMPro.TextMeshPro _OnEventText;
@@ -32,6 +35,9 @@ public class Scanner : MonoBehaviour {
 
     [SerializeField]
     private LayerMask _excludeLayer;
+    [Header("Tag needed for interact")]
+    [SerializeField]
+    private string _TagNeeded = "Scanner";
 
     public void OnTriggerEnter(Collider other)
     {
@@ -78,11 +84,13 @@ public class Scanner : MonoBehaviour {
 
             int layerMask = 1 << _excludeLayer;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance, layerMask))
-            {
+            if (_OneScanPossible && _IsScanned) {
+                if (_OnEventText)
+                    _OnEventText.gameObject.SetActive(false);
+            } else if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance, layerMask)) {
                 Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
 
-                if (hit.transform.gameObject.CompareTag("Scanner")) {
+                if (hit.transform.gameObject.CompareTag(_TagNeeded)) {
 
                     if (_OnEventText)
                         _OnEventText.gameObject.SetActive(true);

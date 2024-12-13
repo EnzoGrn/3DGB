@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkshopManager : ARoom {
-   
+public class RestaurantManager : ARoom {
+
     [Header("Hangar Elements")]
 
     [SerializeField]
@@ -14,10 +14,6 @@ public class WorkshopManager : ARoom {
     [Tooltip("The door of the hangar")]
     private AreaTriggerDoor[] _AreaDoor;
 
-    [SerializeField]
-    [Tooltip("The ambient sound of the machine room")]
-    private AudioSource _AmbientSound;
-
     public override void SetLight(bool isLightOn)
     {
         // -- Put the lights on or off, when interuptor change state
@@ -25,7 +21,8 @@ public class WorkshopManager : ARoom {
             _Lights[i].SetActive(IsLightOn);
 
         // -- Block or unblock the door, when interuptor change state
-        for (int i = 0; i < _AreaDoor.Length; i++) {
+        for (int i = 0; i < _AreaDoor.Length; i++)
+        {
             _AreaDoor[i].LockDoor(false);
 
             if (IsLightOn)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CircuitVitalQuest : MonoBehaviour
@@ -43,6 +44,10 @@ public class CircuitVitalQuest : MonoBehaviour
     [SerializeField]
     private DialogueSO[] _NoFuseDialog;
 
+    [Header("Step #4")]
+    [SerializeField]
+    private MachineRoomManager _MachineRoom;
+
     [Header("Step #5")]
 
     [SerializeField]
@@ -57,7 +62,7 @@ public class CircuitVitalQuest : MonoBehaviour
     private GameObject _WaypointParent;
 
     [SerializeField]
-    private GameObject _Waypoint;
+    public GameObject _Waypoint;
 
     private Waypoint _WaypointScript;
 
@@ -117,6 +122,17 @@ public class CircuitVitalQuest : MonoBehaviour
                     _Waypoint = Instantiate(WaypointPrefab, _WaypointParent.transform);
                 _WaypointScript.SetWaypointUI(_Waypoint);
                 _WaypointScript.isDisabled = true;
+
+                // -- Bind the event OnRoom for trigger open the door --
+                _MachineRoom = Object.FindFirstObjectByType<MachineRoomManager>();
+
+                if (!_MachineRoom) {
+                    Debug.LogError("Error in the quest initialization: MachineRoomManager not found");
+
+                    return;
+                }
+
+                _MachineRoom.ElectricityOff();
             }
 
             // -- Script of the fifth step (step 4) --
@@ -130,7 +146,30 @@ public class CircuitVitalQuest : MonoBehaviour
                 _WaypointScript.SetWaypointUI(_Waypoint);
                 _WaypointScript.isDisabled = true;
             }
-        } else {
+
+            // -- Script of the sixth step (step 5) --
+            if (CircuitNumber == 6) {
+                _WaypointScript = GetComponent<Waypoint>();
+
+                _WaypointParent = GameObject.FindGameObjectWithTag("WaypointsParent");
+
+                if (_WaypointParent && WaypointPrefab)
+                    _Waypoint = Instantiate(WaypointPrefab, _WaypointParent.transform);
+                _WaypointScript.SetWaypointUI(_Waypoint);
+                _WaypointScript.isDisabled = true;
+
+                _MachineRoom = Object.FindFirstObjectByType<MachineRoomManager>();
+
+                if (!_MachineRoom) {
+                    Debug.LogError("Error in the quest initialization: MachineRoomManager not found");
+
+                    return;
+                }
+
+                QuestManager.Instance.OnQuestRemoved += OnQuestFinished;
+            }
+        }
+        else {
             Debug.LogError("QuestUIManager not found");
 
             return;
@@ -200,18 +239,26 @@ public class CircuitVitalQuest : MonoBehaviour
             _WaypointScript.isDisabled = true;
         }
 
-        // If the quest is completed, destroy the quest and everything related to it
-        if (_Quest.CurrentStepIndex == _Quest.QuestInfo.questSteps.Count) {}
+        // -- Step 6, waypoint --
+        if (CircuitNumber == 6 && _Quest.CurrentStepIndex == 5 && _WaypointScript) {
+            _WaypointScript.isDisabled = false;
+        } else if (CircuitNumber == 6 && _WaypointScript) {
+            _WaypointScript.isDisabled = true;
+        }
     }
 
     private void Update()
     {
         // -- Show text to interact --
-        if (_CanInteract && CircuitNumber == 5) {
+        if (_CanInteract) {
             if (Input.GetKeyDown(KeyCode.E)) {
-                _Quest.AdvanceStep();
+                if (CircuitNumber == 5) {
+                    _Quest.AdvanceStep();
 
-                CanInteract(false);
+                    CanInteract(false);
+                } else if (CircuitNumber == 6) {
+                    ReactiveMachineRoom();
+                }
             }
         }
     }
@@ -219,13 +266,13 @@ public class CircuitVitalQuest : MonoBehaviour
     private DialogueSO GetDialogueMark()
     {
         if (FusePickedUp) {
-            if (_Quest.CurrentStepIndex == 2)
+            if (_Quest.CurrentStepIndex > 2)
+                return _AlreadyRepearFuse[Random.Range(0, _AlreadyRepearFuse.Length)];
+            else if (_Quest.CurrentStepIndex == 2)
                 DialogueManager.Instance.OnDialogueEnded += AfterTalkToMark;
             _WaypointScript.isDisabled = false;
             _WaypointScript.DestroyWaypoint();
 
-            if (_Quest.CurrentStepIndex > 2)
-                return _AlreadyRepearFuse[Random.Range(0, _AlreadyRepearFuse.Length)];
             return _HasFuseDialog;
         } else {
             return _NoFuseDialog[Random.Range(0, _NoFuseDialog.Length)];
@@ -243,8 +290,8 @@ public class CircuitVitalQuest : MonoBehaviour
     {
         if (CircuitNumber == 4 && _Quest.CurrentStepIndex == 3) {
             if (other.CompareTag("Player"))
-                _Quest.AdvanceStep();
-        } else if (CircuitNumber == 5 && _Quest.CurrentStepIndex == 4) {
+                InMachineRoom();
+        } else if ((CircuitNumber == 5 && _Quest.CurrentStepIndex == 4) || (CircuitNumber == 6 && _Quest.CurrentStepIndex == 5)) {
             if (other.CompareTag("Player"))
                 CanInteract(true);
         }
@@ -264,6 +311,39 @@ public class CircuitVitalQuest : MonoBehaviour
             _InteractTxt.SetActive(true);
         } else {
             _InteractTxt.SetActive(false);
+        }
+    }
+
+    private void InMachineRoom()
+    {
+        _Quest.AdvanceStep();
+
+        _MachineRoom.OpenDoor();
+    }
+
+    private void ReactiveMachineRoom()
+    {
+        _Quest.AdvanceStep();
+
+        _MachineRoom.ElectricityOn();
+
+        if (_InteractTxt)
+            _InteractTxt.SetActive(false);
+    }
+
+    private void OnQuestFinished(Quest quest)
+    {
+        QuestManager.Instance.OnQuestRemoved -= OnQuestFinished;
+
+        CircuitVitalQuest[] circuitVitalQuest = FindObjectsOfType<CircuitVitalQuest>();
+
+        foreach (var steps in circuitVitalQuest) {
+            if (steps._Waypoint)
+                Destroy(steps._Waypoint);
+            if (steps.CircuitNumber == 3)
+                Destroy(steps);
+            else
+                Destroy(steps.gameObject);
         }
     }
 }

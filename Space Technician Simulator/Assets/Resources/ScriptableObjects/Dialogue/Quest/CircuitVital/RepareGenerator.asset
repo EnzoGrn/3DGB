@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Messages:
   - actorId: 4
-    message: You are in the machine room. Locate the main generator box.
+    message: You're in the machine room. I've just forced the door open.
     toLookId: 0
   - actorId: 4
-    message: Open it and insert the fuse.
+    message: Locate the main generator box. Open it and insert the fuse.
     toLookId: 0
   DialogueType: 0

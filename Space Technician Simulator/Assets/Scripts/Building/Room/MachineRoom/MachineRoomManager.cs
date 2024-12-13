@@ -14,6 +14,10 @@ public class MachineRoomManager : MonoBehaviour {
     [Tooltip("The door of the machine room")]
     public EventTriggerDoor _Door;
 
+    [SerializeField]
+    [Tooltip("The ambient sound of the machine room")]
+    private AudioSource _AmbientSound;
+
     [Header("Machine Room Settings")]
 
     [SerializeField]
@@ -30,6 +34,12 @@ public class MachineRoomManager : MonoBehaviour {
             // -- Put the lights on or off, when interuptor change state
             for (int i = 0; i < _Lights.Length; i++)
                 _Lights[i].SetActive(_IsLightOn);
+
+            // -- Play or stop the ambient sound, when interuptor change state
+            if (_IsLightOn)
+                _AmbientSound.Play();
+            else
+                _AmbientSound.Stop();
         }
     }
 

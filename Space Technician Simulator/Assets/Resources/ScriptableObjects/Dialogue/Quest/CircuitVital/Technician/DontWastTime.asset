@@ -16,4 +16,4 @@ MonoBehaviour:
   - actorId: 5
     message: 'The commander is counting on you. Don''t waste any time! '
     toLookId: 5
-  DialogueType: 0
+  DialogueType: 1

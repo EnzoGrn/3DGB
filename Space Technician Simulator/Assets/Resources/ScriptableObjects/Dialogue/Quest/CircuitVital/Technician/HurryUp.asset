@@ -17,4 +17,4 @@ MonoBehaviour:
     message: I've already fixed the fuse, what are you waiting for? Hurry to the
       machine room and reinstall it before the fault gets any worse.
     toLookId: 5
-  DialogueType: 0
+  DialogueType: 1

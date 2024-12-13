@@ -43,3 +43,7 @@ MonoBehaviour:
       type: 2}
     prefab: {fileID: 5256610929038129126, guid: bead7a59b4720944db34086bfd69e8be,
       type: 3}
+  - title: Restart the system
+    completionDialogue: {fileID: 0}
+    prefab: {fileID: 7843781453862411093, guid: bc2a1896c2ea5234fabb170f6d373a8d,
+      type: 3}

@@ -38,7 +38,7 @@ public class NpcDialogue : MonoBehaviour
         _SphereCollider.radius = _DetectionRadius;
         _SphereCollider.isTrigger = true;
 
-        _StartDialogueText.text = "Press 'Return' to talk";
+        _StartDialogueText.text = "Press 'Enter' to talk";
         _StartDialogueText.gameObject.SetActive(false);
 
 
@@ -101,7 +101,7 @@ public class NpcDialogue : MonoBehaviour
     private void OnDialogueEnd()
     {
         Debug.Log("Dialogue Ended Event");
-        
+
         _IsDialogueActive = false;
 
         if (_DialogueSO == null) return;
@@ -110,7 +110,7 @@ public class NpcDialogue : MonoBehaviour
         {
             // Find GameObejct "DialogueTrigger" and then the script DialogueTrigger
             GameObject dialogueTrigger = GameObject.Find("DialogueTrigger");
-            
+
             if (dialogueTrigger == null)
             {
                 Debug.LogWarning("DialogueTrigger not found.");
@@ -118,7 +118,7 @@ public class NpcDialogue : MonoBehaviour
             }
 
             DialogueTrigger dialogueTriggerScript = dialogueTrigger.GetComponent<DialogueTrigger>();
-            
+
             if (dialogueTriggerScript == null)
             {
                 Debug.LogWarning("DialogueTrigger script not found.");
@@ -134,7 +134,7 @@ public class NpcDialogue : MonoBehaviour
     {
         if (_IsDialogueActive) return;
 
-        Debug.Log("Dialogue Started");
+        //Debug.Log("Dialogue Started");
 
         _IsDialogueActive = true;
 
@@ -179,7 +179,7 @@ public class NpcDialogue : MonoBehaviour
             {
                 _IsDialogueActive = true;
                 DialogueManager.Instance.StartDialogue(_DialogueSO);
-                Debug.Log("OnTriggerEnter Player entered auto dialogue");
+                //Debug.Log("Player entered auto dialogue");
             }
         }
     }
@@ -204,7 +204,7 @@ public class NpcDialogue : MonoBehaviour
             {
                 _IsDialogueActive = false;
                 DialogueManager.Instance.EndDialogue(_DialogueSO.DialogueType);
-                Debug.Log("Player left auto dialogue");
+                //Debug.Log("Player left auto dialogue");
             }
         }
     }
@@ -213,14 +213,14 @@ public class NpcDialogue : MonoBehaviour
     public void NotifyNewManualDialogue()
     {
         _NpcMovement._CanMove = false;
-        Debug.Log("Stop Npc");
+        //Debug.Log("Stop Npc");
     }
 
     // Notify the NPC to start moving again after manual dialogue
     public void NotifyEndManualDialogue()
     {
         _NpcMovement._CanMove = true;
-        Debug.Log("Start Npc");
+        //Debug.Log("Start Npc");
     }
 
     private void OnDestroy()

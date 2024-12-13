@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: DialogueCapitain
+  m_EditorClassIdentifier: 
+  Messages:
+  - actorId: 7
+    message: "Command isn\u2019t about power."
+    toLookId: 7
+  - actorId: 7
+    message: "It\u2019s about responsibility"
+    toLookId: 7
+  - actorId: 7
+    message: Every decision I make carries the weight of 200 lives. Some days, that
+      weight feels heavier than this ship.
+    toLookId: 7
+  DialogueType: 0

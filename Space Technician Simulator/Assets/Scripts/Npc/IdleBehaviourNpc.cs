@@ -7,19 +7,19 @@ public class IdleBehaviourNpc : StateMachineBehaviour
     [SerializeField] private float _TimeBeforeAnimation = 0;
     [SerializeField] private float _TimeBeforeIdle = 0;
     [SerializeField] private bool _IsIdle = false;
-    
+
     private readonly int _MaxIdle = 9;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("IdleBehaviourNpc: OnStateEnter");
+        //Debug.Log("IdleBehaviourNpc: OnStateEnter");
         ResetIdle(animator);
 
         int id = Random.Range(0, _MaxIdle);
 
 
-        Debug.Log("IdleAnimation -> " + id);
+        //Debug.Log("IdleAnimation -> " + id);
         animator.SetFloat("IdleAnimation", id);
     }
 
@@ -28,7 +28,7 @@ public class IdleBehaviourNpc : StateMachineBehaviour
     {
         if (stateInfo.normalizedTime % 1 > 0.98)
         {
-            Debug.Log("ResetIdle");
+            //Debug.Log("ResetIdle");
             ResetIdle(animator);
             animator.SetBool("TriggerIdleAnimation", false);
         }
@@ -61,7 +61,7 @@ public class IdleBehaviourNpc : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
-    //    
+    //
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

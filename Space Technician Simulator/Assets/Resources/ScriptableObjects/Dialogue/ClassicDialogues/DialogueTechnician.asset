@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: DialogueTechnician
+  m_EditorClassIdentifier: 
+  Messages:
+  - actorId: 24
+    message: You hear that hum in the vents?
+    toLookId: 24
+  - actorId: 24
+    message: " It\u2019s not the air system, I\u2019ll tell you that much."
+    toLookId: 24
+  - actorId: 24
+    message: "Something\u2019s in there, and it\u2019s watching us. Mark my words."
+    toLookId: 24
+  DialogueType: 0

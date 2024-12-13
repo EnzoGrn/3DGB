@@ -82,15 +82,13 @@ public class Scanner : MonoBehaviour {
 
             int layerMask = 1 << _excludeLayer;
 
-            Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.green);
+            //Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.green);
 
             if (_OneScanPossible && _IsScanned) {
                 if (_OnEventText)
                     _OnEventText.gameObject.SetActive(false);
             } else if (Physics.Raycast(ray, out RaycastHit hit, _ScannerDistance, layerMask)) {
-                Debug.Log("Hit: " + hit.transform.gameObject.name);
-
-                Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
+                //Debug.DrawRay(_PlayerCamera.position, _PlayerCamera.forward * _ScannerDistance, Color.red);
 
                 if (hit.transform.gameObject.CompareTag(_TagNeeded)) {
 

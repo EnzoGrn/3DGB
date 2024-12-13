@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d1dfc3f461f545a2313be4520219e, type: 3}
+  m_Name: DialogueHunter
+  m_EditorClassIdentifier: 
+  Messages:
+  - actorId: 52
+    message: The trick to hunting aliens? Patience.
+    toLookId: 52
+  - actorId: 52
+    message: "They\u2019re smarter than you think, but they all make mistakes."
+    toLookId: 52
+  - actorId: 52
+    message: "The moment they do? That\u2019s when you strike. And trust me, the
+      thrill never gets old"
+    toLookId: 52
+  DialogueType: 0

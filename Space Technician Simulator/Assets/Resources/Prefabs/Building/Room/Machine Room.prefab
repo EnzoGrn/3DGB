@@ -340,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 1986526729679512943}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.91, y: 0, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,8 +366,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 8
-  MaxDistance: 18
+  MinDistance: 0.25
+  MaxDistance: 17.7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -377,23 +377,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.45197737
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.2133849
+      outSlope: -2.2133849
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7228482
+      value: 0.473423
+      inSlope: -0.5533462
+      outSlope: -0.5533462
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.45215786
+      outSlope: -0.45215786
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -546,6 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0230cf87eecd74890481b7d17bc446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsLightOn: 1
   _Lights:
   - {fileID: 8106637556641213477}
   - {fileID: 489551159022380431}
@@ -554,7 +564,6 @@ MonoBehaviour:
   - {fileID: 6978298294301546523}
   _Door: {fileID: 3338347772711398444}
   _AmbientSound: {fileID: 7374658919976188494}
-  _IsLightOn: 1
 --- !u!1 &4620718042546205534
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,6 +3257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsOpen: 0
+  _IsLocked: 0
   _DoorOpenSound: {fileID: 0}
   _DoorCloseSound: {fileID: 0}
 --- !u!4 &5857628829511127063 stripped

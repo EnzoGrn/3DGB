@@ -48,6 +48,9 @@ public class CircuitVitalQuest : MonoBehaviour
     [SerializeField]
     private MachineRoomManager _MachineRoom;
 
+    [SerializeField]
+    private ARoom[] _Rooms;
+
     [Header("Step #5")]
 
     [SerializeField]
@@ -65,6 +68,11 @@ public class CircuitVitalQuest : MonoBehaviour
     public GameObject _Waypoint;
 
     private Waypoint _WaypointScript;
+
+    [Header("Audio")]
+
+    [SerializeField]
+    private AudioClip _Clip;
 
     /// <summary>
     /// Initialize the quest
@@ -124,15 +132,18 @@ public class CircuitVitalQuest : MonoBehaviour
                 _WaypointScript.isDisabled = true;
 
                 // -- Bind the event OnRoom for trigger open the door --
+                _Rooms = FindObjectsOfType<ARoom>();
+
                 _MachineRoom = Object.FindFirstObjectByType<MachineRoomManager>();
 
-                if (!_MachineRoom) {
+                if (_Rooms.Length == 0 || !_MachineRoom) {
                     Debug.LogError("Error in the quest initialization: MachineRoomManager not found");
 
                     return;
                 }
 
-                _MachineRoom.ElectricityOff();
+                for (int i = 0; i < _Rooms.Length; i++)
+                    _Rooms[i].ElectricityOff();
             }
 
             // -- Script of the fifth step (step 4) --
@@ -158,9 +169,11 @@ public class CircuitVitalQuest : MonoBehaviour
                 _WaypointScript.SetWaypointUI(_Waypoint);
                 _WaypointScript.isDisabled = true;
 
+                // -- Bind the event OnRoom for trigger open the door --
+                _Rooms = FindObjectsOfType<ARoom>();
                 _MachineRoom = Object.FindFirstObjectByType<MachineRoomManager>();
 
-                if (!_MachineRoom) {
+                if (_Rooms.Length == 0 || !_MachineRoom) {
                     Debug.LogError("Error in the quest initialization: MachineRoomManager not found");
 
                     return;
@@ -253,6 +266,8 @@ public class CircuitVitalQuest : MonoBehaviour
         if (_CanInteract) {
             if (Input.GetKeyDown(KeyCode.E)) {
                 if (CircuitNumber == 5) {
+                    AudioManager.Instance.PlaySFX(_Clip, transform);
+
                     _Quest.AdvanceStep();
 
                     CanInteract(false);
@@ -323,9 +338,12 @@ public class CircuitVitalQuest : MonoBehaviour
 
     private void ReactiveMachineRoom()
     {
+        AudioManager.Instance.PlaySFX(_Clip, transform);
+
         _Quest.AdvanceStep();
 
-        _MachineRoom.ElectricityOn();
+        for (int i = 0; i < _Rooms.Length; i++)
+            _Rooms[i].ElectricityOn();
 
         if (_InteractTxt)
             _InteractTxt.SetActive(false);

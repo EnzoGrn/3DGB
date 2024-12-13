@@ -269,3 +269,4 @@ MonoBehaviour:
     type: 3}
   _WaypointParent: {fileID: 0}
   _Waypoint: {fileID: 0}
+  _Clip: {fileID: 8300000, guid: 8c3cef8c8fd854546a537bb0c04af179, type: 3}

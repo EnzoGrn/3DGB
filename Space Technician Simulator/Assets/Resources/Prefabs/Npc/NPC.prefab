@@ -4777,6 +4777,12 @@ MonoBehaviour:
   _DialogueSO: {fileID: 11400000, guid: 8db7929da3583cd41a097dbb4104506b, type: 2}
   _NpcMovement: {fileID: 5151601846750909679}
   _StartDialogueText: {fileID: 2169984118964925107}
+  _NpcNameText: {fileID: 1138030424665124787}
+  _CanLookPlayer: 0
+  _ActorsInfo: {fileID: 11400000, guid: b7a1e1fdc31746d489bebf691cb33ca1, type: 2}
+  _DialogueCamera: {fileID: 8453549093247814325}
+  _DynamicDialogue: 0
+  _DefaultDialogue: {fileID: 0}
 --- !u!114 &8453549093247814325
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class ARoom : MonoBehaviour, IRoom {
         get { return _IsLightOn; }
         set
         {
-            SetLight(value);
+            _IsLightOn = value;
 
             OnElectricityChange?.Invoke(value);
         }

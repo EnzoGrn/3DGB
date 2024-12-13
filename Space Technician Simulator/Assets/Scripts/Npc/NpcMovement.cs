@@ -46,7 +46,7 @@ public class NpcMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < _Target.Length; i++)
+        /*for (int i = 0; i < _Target.Length; i++)
         {
             if (i < _Target.Length - 1)
             {
@@ -62,16 +62,22 @@ public class NpcMovement : MonoBehaviour
             // Add a sphere to the waypoints
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(_Target[i].position, 0.5f);
-        }
+        }*/
     }
 
     private void Start()
     {
         _HasAnimator = TryGetComponent(out _Animator);
         _Agent = GetComponent<NavMeshAgent>();
-        _Agent.SetDestination(_Target[_CurrentTarget].position);
-
         AssignAnimationIDs();
+
+        // Check if there are some targets before Setting a destination
+
+        if (_Target.GetLength(0) <= 0 || !_Target[_CurrentTarget])
+        {
+            return;
+        }
+        _Agent.SetDestination(_Target[_CurrentTarget].position);
     }
 
     private void Update()
@@ -87,7 +93,7 @@ public class NpcMovement : MonoBehaviour
             LookAtPlayer();
         }
 
-        if (_Agent.remainingDistance < 0.1f && !_IsWaiting)
+        if (_Agent.remainingDistance < 0.1f && !_IsWaiting && _Target.GetLength(0) > 0)
         {
             StartCoroutine(NextTarget());
         }
@@ -207,7 +213,8 @@ public class NpcMovement : MonoBehaviour
 
         //Debug.Log("End Idle Animation");
 
-        _Agent.SetDestination(_Target[_CurrentTarget].position);
+        if (_Target[_CurrentTarget])
+            _Agent.SetDestination(_Target[_CurrentTarget].position);
         _IsWaiting = false;
     }
 

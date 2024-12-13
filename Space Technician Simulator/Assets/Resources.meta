@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Space Technician Simulator/Assets/Resources/ScriptableObjects/Dialogue/ClassicDialogues.meta
+guid: 051175f7bfa2fb54abcbc686e9ea17dc
+========
 guid: 802fe31afd6ec0f49b17a7b37d8616a8
+>>>>>>>> e86d5177d0ae7846cea791a82a7e31b21f52cf66:Space Technician Simulator/Assets/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

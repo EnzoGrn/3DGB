@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +12,11 @@ public class NpcDialogue : MonoBehaviour
     [SerializeField] private DialogueSO _DialogueSO; // The dialogues of a player to display
     [SerializeField] private NpcMovement _NpcMovement;
     [SerializeField] private TMP_Text _StartDialogueText;
+    [SerializeField] private TMP_Text _NpcNameText;
     [SerializeField] private bool _CanLookPlayer;
+    
+    [SerializeField] private ActorSO _ActorsInfo; // (Contain the actorIndex)
+    [SerializeField] private DialogueCamera _DialogueCamera; // (Contain the actorIndex)
 
     private bool _IsPlayerDetected = false;
     private bool _IsDialogueActive = false;
@@ -35,6 +40,24 @@ public class NpcDialogue : MonoBehaviour
 
         _StartDialogueText.text = "Press 'Return' to talk";
         _StartDialogueText.gameObject.SetActive(false);
+
+
+        // Get the actor name by index in actorSO
+
+        // Find Actorname by actor id in 
+
+        if (_ActorsInfo != null
+            && _ActorsInfo.Actors != null
+            && _DialogueCamera.ActorIndex >= 0
+            && _DialogueCamera.ActorIndex < _ActorsInfo.Actors.Length
+            && _ActorsInfo.Actors[_DialogueCamera.ActorIndex] != null)
+        {
+            _NpcNameText.text = _ActorsInfo.Actors[_DialogueCamera.ActorIndex].actorName;
+        }
+        else
+        {
+            Debug.LogWarning("ActorSO is null. Ensure ActorSO is in the scene and initialized.");
+        }
     }
 
     private void Start()
@@ -80,6 +103,8 @@ public class NpcDialogue : MonoBehaviour
         Debug.Log("Dialogue Ended Event");
         
         _IsDialogueActive = false;
+
+        if (_DialogueSO == null) return;
 
         if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
         {
@@ -141,6 +166,8 @@ public class NpcDialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_DialogueSO == null) return;
+
         if (other.CompareTag("Player"))
         {
             _IsPlayerDetected = true;
@@ -167,6 +194,8 @@ public class NpcDialogue : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (_DialogueSO == null) return;
+
         if (other.CompareTag("Player"))
         {
             _IsPlayerDetected = false;

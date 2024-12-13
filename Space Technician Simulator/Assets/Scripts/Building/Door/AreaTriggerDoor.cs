@@ -30,6 +30,9 @@ public class AreaTriggerDoor : MonoBehaviour {
     [SerializeField]
     private UnityEvent _OnDoorAlreadyClose; // !< Event triggered when the door is already close
 
+    [SerializeField]
+    private bool _LockDoor = false;
+
     private void Start()
     {
         _Animator = GetComponent<Animator>();
@@ -37,6 +40,9 @@ public class AreaTriggerDoor : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_LockDoor)
+            return;
+
         // Check if the player is in the trigger
         if (other.CompareTag("Player")) {
             Open();
@@ -45,6 +51,9 @@ public class AreaTriggerDoor : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
+        if (_LockDoor)
+            return;
+
         // Check if the player is in the trigger
         if (other.CompareTag("Player")) {
             Close();
@@ -89,5 +98,10 @@ public class AreaTriggerDoor : MonoBehaviour {
         // Trigger the door close event
         if (callEvent)
             _OnDoorClose?.Invoke();
+    }
+
+    public void LockDoor(bool locked)
+    {
+        _LockDoor = locked;
     }
 }

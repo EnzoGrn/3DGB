@@ -9,6 +9,9 @@ public class EventTriggerDoor : MonoBehaviour {
     [SerializeField]
     private bool _IsOpen = false; // !< Door state
 
+    [SerializeField]
+    private bool _IsLocked = false; // !< Door state
+
     [Header("Audio")]
     [SerializeField]
     private AudioClip _DoorOpenSound; // !< Door Open Sound
@@ -29,7 +32,7 @@ public class EventTriggerDoor : MonoBehaviour {
 
     public void OnTrigger(bool open)
     {
-        if (_IsOpen == open)
+        if (_IsOpen == open || _IsLocked)
             return;
         _IsOpen = open;
 
@@ -44,5 +47,10 @@ public class EventTriggerDoor : MonoBehaviour {
             if (AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFX(_DoorCloseSound, transform);
         }
+    }
+
+    public void LockDoor(bool locked)
+    {
+        _IsLocked = locked;
     }
 }

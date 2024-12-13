@@ -46,7 +46,7 @@ public class NpcMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < _Target.Length; i++)
+        /*for (int i = 0; i < _Target.Length; i++)
         {
             if (i < _Target.Length - 1)
             {
@@ -62,7 +62,7 @@ public class NpcMovement : MonoBehaviour
             // Add a sphere to the waypoints
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(_Target[i].position, 0.5f);
-        }
+        }*/
     }
 
     private void Start()
@@ -73,7 +73,7 @@ public class NpcMovement : MonoBehaviour
 
         // Check if there are some targets before Setting a destination
 
-        if (_Target.GetLength(0) <= 0)
+        if (_Target.GetLength(0) <= 0 || !_Target[_CurrentTarget])
         {
             return;
         }
@@ -213,7 +213,8 @@ public class NpcMovement : MonoBehaviour
 
         //Debug.Log("End Idle Animation");
 
-        _Agent.SetDestination(_Target[_CurrentTarget].position);
+        if (_Target[_CurrentTarget])
+            _Agent.SetDestination(_Target[_CurrentTarget].position);
         _IsWaiting = false;
     }
 

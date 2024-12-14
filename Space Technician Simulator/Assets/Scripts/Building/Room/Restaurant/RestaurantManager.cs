@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RestaurantManager : ARoom {
 
-    [Header("Hangar Elements")]
+    [Header("Restaurant Elements")]
 
     [SerializeField]
-    [Tooltip("The lights of the hangar")]
+    [Tooltip("The lights of the restaurant")]
     private GameObject[] _Lights;
 
     [SerializeField]
-    [Tooltip("The door of the hangar")]
+    [Tooltip("The door of the restaurant")]
     private AreaTriggerDoor[] _AreaDoor;
 
     public override void SetLight(bool isLightOn)

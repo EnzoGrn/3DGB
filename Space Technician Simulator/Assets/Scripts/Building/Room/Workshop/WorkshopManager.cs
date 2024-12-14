@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class WorkshopManager : ARoom {
    
-    [Header("Hangar Elements")]
+    [Header("Workshop Elements")]
 
     [SerializeField]
-    [Tooltip("The lights of the hangar")]
+    [Tooltip("The lights of the workshop")]
     private GameObject[] _Lights;
 
     [SerializeField]
-    [Tooltip("The door of the hangar")]
+    [Tooltip("The door of the workshop")]
     private AreaTriggerDoor[] _AreaDoor;
 
     [SerializeField]
-    [Tooltip("The ambient sound of the machine room")]
+    [Tooltip("The ambient sound of the workshop")]
     private AudioSource _AmbientSound;
 
     public override void SetLight(bool isLightOn)

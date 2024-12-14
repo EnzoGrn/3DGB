@@ -592,8 +592,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.1
-  MaxDistance: 9.2
+  MinDistance: 5
+  MaxDistance: 9
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

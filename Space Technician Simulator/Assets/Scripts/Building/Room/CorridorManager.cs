@@ -22,6 +22,10 @@ public class CorridorManager : ARoom {
     [Tooltip("The elevator of the corridor")]
     public LiftController[] _Elevator;
 
+    [SerializeField]
+    [Tooltip("The alarm sound of the spaceship")]
+    private AudioSource _AmbientSound;
+
     public override void SetLight(bool isLightOn)
     {
         // -- Lock or unlock the doors, when interuptor change state
@@ -41,6 +45,8 @@ public class CorridorManager : ARoom {
 
     private void StartAlarm()
     {
+        _AmbientSound.Play();
+
         // -- Infinite coroutine to make the lights blink
         StartCoroutine(Alarm());
     }
@@ -57,8 +63,11 @@ public class CorridorManager : ARoom {
 
     private void StopAlarm()
     {
+        _AmbientSound.Stop();
+
         for (int i = 0; i < _Lights.Length; i++)
             _Lights[i].SetActive(true);
+        _TriggerDoor[0].OnTrigger(true);
     }
 
     public void Awake()

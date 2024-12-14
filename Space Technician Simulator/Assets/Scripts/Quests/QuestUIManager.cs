@@ -37,6 +37,14 @@ public class QuestUIManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (questHUD.activeSelf == false) {
+            foreach (Transform child in transform)
+                Destroy(child.gameObject);
+        }
+    }
+
     public void StartDialogue(DialogueSO dialogues)
     {
         DialogueManager.Instance.StartDialogue(dialogues);

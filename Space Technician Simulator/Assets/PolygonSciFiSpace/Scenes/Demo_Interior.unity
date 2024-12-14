@@ -4072,6 +4072,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7134d1b079bab07438cd9cae394f8ff4, type: 3}
+--- !u!1 &284524434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847147095309671154, guid: 7134d1b079bab07438cd9cae394f8ff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 284524433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &296385385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15933,12 +15939,12 @@ PrefabInstance:
         type: 3}
       propertyPath: KeyHintHUD
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 284524434}
     - target: {fileID: 5936775177982268758, guid: 4ac72ce9d956e31499dd48cabac16ff2,
         type: 3}
       propertyPath: KeyHintHUD
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 284524434}
     - target: {fileID: 7639352019504543191, guid: 4ac72ce9d956e31499dd48cabac16ff2,
         type: 3}
       propertyPath: m_LocalPosition.x

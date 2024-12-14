@@ -10,6 +10,7 @@ TagManager:
   - ManualDialogue
   - Chest
   - WaypointsParent
+  - HUD
   layers:
   - Default
   - TransparentFX

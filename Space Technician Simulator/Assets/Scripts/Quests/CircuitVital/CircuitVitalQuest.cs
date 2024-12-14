@@ -59,6 +59,9 @@ public class CircuitVitalQuest : MonoBehaviour
     [SerializeField]
     private GameObject _InteractTxt;
 
+    [SerializeField]
+    private Camera _CameraCinematic;
+
     public GameObject WaypointPrefab;
 
     [SerializeField]
@@ -181,8 +184,7 @@ public class CircuitVitalQuest : MonoBehaviour
 
                 QuestManager.Instance.OnQuestRemoved += OnQuestFinished;
             }
-        }
-        else {
+        } else {
             Debug.LogError("QuestUIManager not found");
 
             return;
@@ -340,13 +342,38 @@ public class CircuitVitalQuest : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(_Clip, transform);
 
-        _Quest.AdvanceStep();
-
         for (int i = 0; i < _Rooms.Length; i++)
             _Rooms[i].ElectricityOn();
 
         if (_InteractTxt)
             _InteractTxt.SetActive(false);
+
+        _Quest.AdvanceStep();
+
+        StartCoroutine(Cinematic());
+    }
+
+    private IEnumerator Cinematic()
+    {
+        GameObject hud = GameObject.FindGameObjectWithTag("HUD");
+
+        if (!hud) {
+            Debug.LogError("HUD not found");
+
+            yield return null;
+        } else {
+            hud.SetActive(false);
+
+            Camera currentCamera = Camera.main;
+
+            _CameraCinematic.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(3f);
+
+            currentCamera.gameObject.SetActive(true);
+
+            hud.SetActive(true);
+        }
     }
 
     private void OnQuestFinished(Quest quest)
@@ -355,7 +382,15 @@ public class CircuitVitalQuest : MonoBehaviour
 
         CircuitVitalQuest[] circuitVitalQuest = FindObjectsOfType<CircuitVitalQuest>();
 
+        CircuitVitalQuest cinematic = null;
+
         foreach (var steps in circuitVitalQuest) {
+            if (steps.CircuitNumber == 6) {
+                cinematic = steps;
+
+                continue;
+            }
+            
             if (steps._Waypoint)
                 Destroy(steps._Waypoint);
             if (steps.CircuitNumber == 3)
@@ -363,5 +398,15 @@ public class CircuitVitalQuest : MonoBehaviour
             else
                 Destroy(steps.gameObject);
         }
+
+        if (cinematic)
+            StartCoroutine(Wait(cinematic));
+    }
+
+    private IEnumerator Wait(CircuitVitalQuest cinematic)
+    {
+        yield return new WaitForSeconds(3f);
+
+        Destroy(cinematic.gameObject);
     }
 }

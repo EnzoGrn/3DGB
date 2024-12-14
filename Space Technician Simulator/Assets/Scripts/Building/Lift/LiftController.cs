@@ -91,6 +91,8 @@ public class LiftController : MonoBehaviour {
 
     public void PlayerIsInside(bool isInside)
     {
+        if (_Lock)
+            return;
         if (isInside) {
             CloseAllDoors();
 

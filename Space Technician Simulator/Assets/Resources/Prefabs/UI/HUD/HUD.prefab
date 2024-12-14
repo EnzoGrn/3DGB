@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 2814065406459342246}
   m_Layer: 5
   m_Name: HUD
-  m_TagString: Untagged
+  m_TagString: HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1054,7 +1054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8de32e13885ee4b84fe49e54b0995b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narratorName: Captain Orlan
   _Dialogue: {fileID: 8476709705177851153}
   _Name: {fileID: 1797655885304315116}
   questListItem: {fileID: 7427035178405880933, guid: f5a3cd294977631498b51589ad6118ee,

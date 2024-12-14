@@ -14,7 +14,7 @@ public class NpcDialogue : MonoBehaviour
     [SerializeField] private TMP_Text _StartDialogueText;
     [SerializeField] private TMP_Text _NpcNameText;
     [SerializeField] private bool _CanLookPlayer;
-    
+
     [SerializeField] private ActorSO _ActorsInfo; // (Contain the actorIndex)
     [SerializeField] private DialogueCamera _DialogueCamera; // (Contain the actorIndex)
 
@@ -44,7 +44,7 @@ public class NpcDialogue : MonoBehaviour
 
         // Get the actor name by index in actorSO
 
-        // Find Actorname by actor id in 
+        // Find Actorname by actor id in
 
         if (_ActorsInfo != null
             && _ActorsInfo.Actors != null
@@ -106,7 +106,7 @@ public class NpcDialogue : MonoBehaviour
 
         if (_DialogueSO == null) return;
 
-        if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
+        if (_DialogueSO.DialogueType == DialogueType.Manual)
         {
             // Find GameObejct "DialogueTrigger" and then the script DialogueTrigger
             GameObject dialogueTrigger = GameObject.Find("DialogueTrigger");
@@ -149,7 +149,7 @@ public class NpcDialogue : MonoBehaviour
 
         if (!_DialogueSO) return;
 
-        if (_DialogueSO.DialogueType == DialogueType.ManualDialogue)
+        if (_DialogueSO.DialogueType == DialogueType.Manual)
         {
             NotifyNewManualDialogue();
         }
@@ -175,7 +175,7 @@ public class NpcDialogue : MonoBehaviour
             Debug.Log("OnTriggerEnter PLayer is detected");
             Debug.Log("OnTriggerEnter -> " + _IsDialogueActive);
             Debug.Log("OnTriggerEnter -> " + _DialogueSO.DialogueType);
-            if (!_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+            if (!_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.Auto)
             {
                 _IsDialogueActive = true;
                 DialogueManager.Instance.StartDialogue(_DialogueSO);
@@ -186,7 +186,7 @@ public class NpcDialogue : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue && _CanLookPlayer)
+        if (other.CompareTag("Player") && _IsDialogueActive && _DialogueSO.DialogueType == DialogueType.Auto && _CanLookPlayer)
         {
             _NpcMovement.LookAtPlayer();
         }
@@ -200,7 +200,7 @@ public class NpcDialogue : MonoBehaviour
         {
             _IsPlayerDetected = false;
 
-            if (_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.AutoDialogue)
+            if (_IsDialogueActive && _DialogueSO.DialogueType == DialogueType.Auto)
             {
                 _IsDialogueActive = false;
                 DialogueManager.Instance.EndDialogue(_DialogueSO.DialogueType);

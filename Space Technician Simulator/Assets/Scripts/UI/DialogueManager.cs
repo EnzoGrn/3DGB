@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     // Action to know when the dialogue is ended
     public Action OnDialogueEnded;
+    public Action<string> OnNewDialogue;
 
     private void Awake()
     {
@@ -64,7 +65,7 @@ public class DialogueManager : MonoBehaviour
         _ActiveMessageIndex = 0;
         _IsDialogueActive = true;
 
-        if (dialogues.DialogueType == DialogueType.ManualDialogue)
+        if (dialogues.DialogueType == DialogueType.Manual)
         {
             _HintKeyBox.SetActive(true);
         }
@@ -146,7 +147,7 @@ public class DialogueManager : MonoBehaviour
 
         if (actor == null) return;
 
-        if (dialogueType == DialogueType.ManualDialogue)
+        if (dialogueType == DialogueType.Manual)
         {
             HandleDialogueCamera(message);
         }
@@ -166,6 +167,8 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        OnNewDialogue?.Invoke(message.animationName);
+
         // Cancel the coroutine if it's already running
         if (_MessageCoroutine != null) StopCoroutine(_MessageCoroutine);
         _MessageCoroutine = StartCoroutine(TypeMessage(message.message, dialogueType));
@@ -180,7 +183,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
-        if (dialogueType == DialogueType.AutoDialogue)
+        if (dialogueType == DialogueType.Auto)
         {
             yield return new WaitForSeconds(2f);
             NextMessage(dialogueType);
@@ -208,7 +211,7 @@ public class DialogueManager : MonoBehaviour
         _DialogueBox.SetActive(false);
         _HintKeyBox.SetActive(false);
 
-        if (dialogueType == DialogueType.ManualDialogue)
+        if (dialogueType == DialogueType.Manual)
         {
             if (_DialogueCameraActive != null)
             {
@@ -230,8 +233,8 @@ public class DialogueManager : MonoBehaviour
 [System.Serializable]
 public enum DialogueType
 {
-    AutoDialogue,
-    ManualDialogue
+    Auto,
+    Manual
 }
 
 [System.Serializable]
@@ -240,6 +243,7 @@ public class Message
     public int actorId;
     public string message;
     public int toLookId;
+    [SerializeField, Tooltip("The name of the animation to play. If none, the NPC will play Idle animation")] public string animationName;
 }
 
 [System.Serializable]

@@ -29,6 +29,8 @@ public class LoadingManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        // Wait 2 seconds before loading the scene
+        yield return new WaitForSeconds(2f);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 

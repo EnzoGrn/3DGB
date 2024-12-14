@@ -27,6 +27,9 @@ public class LiftController : MonoBehaviour {
     [SerializeField]
     private bool _IsMoving = false; // !< Is the elevator moving?
 
+    [SerializeField]
+    private bool _Lock = false; // !< Is the elevator locked?
+
     [Header("Audio")]
     [SerializeField]
     private AudioClip _MoveSound; // !< Sound of the elevator moving
@@ -65,6 +68,8 @@ public class LiftController : MonoBehaviour {
 
     public void CallElevator(int floorIndex)
     {
+        if (_Lock)
+            return;
         if (!_IsMoving && floorIndex != _CurrentFloor) {
             CloseAllDoors();
 
@@ -100,8 +105,15 @@ public class LiftController : MonoBehaviour {
 
     private void ChangeFloor()
     {
+        if (_Lock)
+            return;
         if (_CurrentFloor != _TargetFloor) {
             _IsMoving = true;
         }
+    }
+
+    public void LockElevator(bool isLocked)
+    {
+        _Lock = isLocked;
     }
 }

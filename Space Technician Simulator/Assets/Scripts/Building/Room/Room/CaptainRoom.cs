@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkshopManager : ARoom {
-   
-    [Header("Workshop Elements")]
+public class CaptainRoom : ARoom {
+
+    [Header("Captain room Elements")]
 
     [SerializeField]
-    [Tooltip("The lights of the workshop")]
+    [Tooltip("The lights of the captain room")]
     private GameObject[] _Lights;
 
     [SerializeField]
-    [Tooltip("The door of the workshop")]
+    [Tooltip("The door of the captain room")]
     private AreaTriggerDoor[] _AreaDoor;
 
     public override void SetLight(bool isLightOn)
@@ -21,15 +21,8 @@ public class WorkshopManager : ARoom {
             _Lights[i].SetActive(IsLightOn);
 
         // -- Block or unblock the door, when interuptor change state
-        for (int i = 0; i < _AreaDoor.Length; i++) {
-            _AreaDoor[i].LockDoor(false);
-
-            if (IsLightOn)
-                _AreaDoor[i].Close(false);
-            else
-                _AreaDoor[i].Open(false);
+        for (int i = 0; i < _AreaDoor.Length; i++)
             _AreaDoor[i].LockDoor(!IsLightOn);
-        }
     }
 
     public void Awake()

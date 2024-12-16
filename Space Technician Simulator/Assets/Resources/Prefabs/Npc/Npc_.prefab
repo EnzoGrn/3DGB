@@ -742,19 +742,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1823635352985806, guid: d81fdbb76a102404db98fb593e690c3d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6438958909889290568}
-    - targetCorrespondingSourceObject: {fileID: 1823635352985806, guid: d81fdbb76a102404db98fb593e690c3d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3660686075928425523}
-    - targetCorrespondingSourceObject: {fileID: 1823635352985806, guid: d81fdbb76a102404db98fb593e690c3d,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4794645107573238442}
-    - targetCorrespondingSourceObject: {fileID: 1823635352985806, guid: d81fdbb76a102404db98fb593e690c3d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2600400274114285016}
   m_SourcePrefab: {fileID: 100100000, guid: d81fdbb76a102404db98fb593e690c3d, type: 3}
 --- !u!1 &5089977176791510566 stripped
 GameObject:
@@ -777,7 +765,7 @@ MonoBehaviour:
   canMove: 1
   movementPoints:
   - point: {fileID: 7351631360310723431}
-    animationName: 
+    animationName: Happy
   - point: {fileID: 4129691801389435621}
     animationName: 
   - point: {fileID: 4099916678880956324}
@@ -785,7 +773,7 @@ MonoBehaviour:
   movementType: 1
   moveActive: 1
   showFootstepClips: 0
-  showMovementPoints: 0
+  showMovementPoints: 1
   FootstepAudioClips:
   - {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
   - {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
@@ -882,54 +870,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6438958909889290568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089977176791510566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7624f2b7e9eb644bb5cb408bc1d627, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 5095105051017709416}
-  offset: {x: 0, y: 1.25, z: 0}
-  isDisabled: 0
---- !u!114 &3660686075928425523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089977176791510566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08262c2a621f97e4999f7feeaa6b2aa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CircuitNumber: 3
-  _QuestManagerUI: {fileID: 0}
-  _Fuse: {fileID: 0}
-  FusePickedUp: 0
-  _HasFuseDialog: {fileID: 11400000, guid: 1ad702b6239985a46bc4aa59f24c70f7, type: 2}
-  _AlreadyRepearFuse:
-  - {fileID: 11400000, guid: b0d8f483be1aeb94baf3dd139865ad11, type: 2}
-  - {fileID: 11400000, guid: 3e7aae5887bb12245b02b371b1c67b65, type: 2}
-  _NoFuseDialog:
-  - {fileID: 11400000, guid: 6d4ea240eddf7a044aff8acc9b7c962f, type: 2}
-  - {fileID: 11400000, guid: 17f8dd5ee3b6ce2438cdbbeb116da068, type: 2}
-  _MachineRoom: {fileID: 0}
-  _Rooms: []
-  _CanInteract: 0
-  _InteractTxt: {fileID: 0}
-  _CameraCinematic: {fileID: 0}
-  WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
-    type: 3}
-  _WaypointParent: {fileID: 0}
-  _Waypoint: {fileID: 0}
-  _Clip: {fileID: 0}
 --- !u!135 &4794645107573238442
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -951,20 +891,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.25
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2600400274114285016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089977176791510566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c67f5ae637df5b429efb60513db64ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActorIndex: 5
-  Camera: {fileID: 1317707899298123149}
 --- !u!4 &5095105051017709416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4559524193061248, guid: d81fdbb76a102404db98fb593e690c3d,

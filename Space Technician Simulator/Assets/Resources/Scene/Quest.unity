@@ -2116,16 +2116,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Npc_
       objectReference: {fileID: 0}
-    - target: {fileID: 7011401998117785321, guid: c98a1e998dbedb0498eae07cf2204354,
-        type: 3}
-      propertyPath: showMovementPoints
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7011401998117785321, guid: c98a1e998dbedb0498eae07cf2204354,
-        type: 3}
-      propertyPath: movementPoints.Array.data[0].animationName
-      value: Happy
-      objectReference: {fileID: 0}
     - target: {fileID: 9129712682259836786, guid: c98a1e998dbedb0498eae07cf2204354,
         type: 3}
       propertyPath: m_LocalPosition.x

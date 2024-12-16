@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Messages:
   - actorId: 10
-    message: Yeah you do not hesitate to take the elevator next to me !
+    message: After you fixed the lights, don't hesitate to take the elevator next
+      to me !
     toLookId: 10
+    animationName: Happy
   DialogueType: 0

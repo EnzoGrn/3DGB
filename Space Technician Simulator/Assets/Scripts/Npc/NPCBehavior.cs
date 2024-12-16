@@ -45,7 +45,7 @@ public class NPCBehavior : MonoBehaviour
     public float waitTime = 1f; // Time to wait at each point
     public float moveSpeed = 3f;
     private NavMeshAgent _Agent;
-
+    private float _originalRotation;
     #endregion
 
     #region DIALOGUE SETTINGS
@@ -87,7 +87,7 @@ public class NPCBehavior : MonoBehaviour
 
         interactionText.gameObject.SetActive(false);
         interactionText.text = "Press 'Enter' to talk";
-
+        _originalRotation = transform.rotation.eulerAngles.y;
         RegisterEvent();
     }
 
@@ -343,7 +343,7 @@ public class NPCBehavior : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && isDialogueActive && currentDialogue.DialogueType == DialogueType.Manual && lookAtPlayer)
+        if (other.CompareTag("Player") && isDialogueActive && lookAtPlayer)
         {
             LookAtPlayer();
         }
@@ -356,6 +356,8 @@ public class NPCBehavior : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 isPlayerDetected = false;
+                StartCoroutine(WaitEndDialogue());
+                transform.rotation = Quaternion.Euler(0, _originalRotation, 0);
 
                 if (isDialogueActive && currentDialogue.DialogueType == DialogueType.Auto)
                 {
@@ -364,6 +366,11 @@ public class NPCBehavior : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator WaitEndDialogue()
+    {
+        yield return new WaitForSeconds(1.0f);
     }
 
     private void OnDestroy()
@@ -614,6 +621,9 @@ public class NPCBehavior : MonoBehaviour
                         new GUIContent("Default Dialogue", "The default dialogue to use if dynamic dialogue generation fails."),
                         true
                     );
+                }
+                else {
+                    npc.defaultDialogue = null;
                 }
             }
             #endregion

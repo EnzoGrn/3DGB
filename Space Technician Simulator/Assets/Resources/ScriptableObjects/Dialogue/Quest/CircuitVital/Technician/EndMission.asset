@@ -16,11 +16,11 @@ MonoBehaviour:
   - actorId: 5
     message: Oh, that's good, I saw the lights come back on! You've done a great
       job.
-    toLookId: 5
+    toLookId: 0
     animationName: 
   - actorId: 5
     message: Thanks to you, the base can continue to function normally... for the
       time being.
-    toLookId: 5
+    toLookId: 0
     animationName: 
   DialogueType: 1

@@ -10269,7 +10269,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 3c3a93cbbbd961143be731e38414ebb3, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8ea4c36982067c94499daafb4ffbd97d, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1178887277
 Transform:

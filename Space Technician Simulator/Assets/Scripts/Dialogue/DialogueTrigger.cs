@@ -6,6 +6,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private SphereCollider _SphereCollider;
     private NpcDialogue _NpcDialogue;
+    //private NPCBehavior _NpcDialogue;
     [SerializeField] private GameObject _Player;
 
     public bool IsManualDialogueActive;
@@ -72,6 +73,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             Debug.Log("ManualDialogue Detected Store Object");
             _NpcDialogue = other.GetComponent<NpcDialogue>();
+            //_NpcDialogue = other.GetComponent<NPCBehavior>();
         }
     }
 

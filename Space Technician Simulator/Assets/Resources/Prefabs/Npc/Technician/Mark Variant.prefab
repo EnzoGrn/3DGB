@@ -346,11 +346,16 @@ MonoBehaviour:
   _NoFuseDialog:
   - {fileID: 11400000, guid: 6d4ea240eddf7a044aff8acc9b7c962f, type: 2}
   - {fileID: 11400000, guid: 17f8dd5ee3b6ce2438cdbbeb116da068, type: 2}
+  _MachineRoom: {fileID: 0}
+  _Rooms: []
   _CanInteract: 0
+  _InteractTxt: {fileID: 0}
+  _CameraCinematic: {fileID: 0}
   WaypointPrefab: {fileID: 6639000578453456151, guid: 47131b3d03070a148bec87137743c9bc,
     type: 3}
   _WaypointParent: {fileID: 0}
   _Waypoint: {fileID: 0}
+  _Clip: {fileID: 0}
 --- !u!114 &-4751790117194249679
 MonoBehaviour:
   m_ObjectHideFlags: 0

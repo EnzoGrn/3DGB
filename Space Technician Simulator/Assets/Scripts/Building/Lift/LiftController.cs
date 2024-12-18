@@ -94,12 +94,15 @@ public class LiftController : MonoBehaviour {
         if (_Lock)
             return;
         if (isInside) {
+            Debug.Log("Player is inside the elevator");
+            Debug.Log("Current Floor: " + _CurrentFloor);
             CloseAllDoors();
 
             if (_CurrentFloor == 0)
                 _TargetFloor = 1;
             else
                 _TargetFloor = 0;
+            Debug.Log("Target Floor: " + _TargetFloor);
         }
 
         ChangeFloor();

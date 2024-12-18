@@ -3262,7 +3262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1259035822}
   showCursor: 0
-  sceneName: Demo_Interior
+  sceneName: LoadingScene
 --- !u!224 &653348011 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8362444953873479262, guid: 8f84e46032f027041b96a0800da0183a,

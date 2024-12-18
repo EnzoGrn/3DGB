@@ -103,16 +103,16 @@ public class CircuitVitalQuest : MonoBehaviour
 
             // -- Script of the third step (step 2) --
             if (CircuitNumber == 3) {
-                //NpcDialogue dialog = GetComponent<NpcDialogue>();
-                NPCBehavior npc = GetComponent<NPCBehavior>();
+                NpcDialogue dialog = GetComponent<NpcDialogue>();
+                //NPCBehavior npc = GetComponent<NPCBehavior>();
 
-                if (!npc) {
+                if (!dialog) {
                     Debug.LogError("Error in the quest initialization: NpcDialogue not found");
 
                     return;
                 }
 
-                npc.onGenerateNewDialogue += () => GetDialogueMark();
+                dialog.OnNewDialogue += () => GetDialogueMark();
 
                 _WaypointScript = GetComponent<Waypoint>();
 
